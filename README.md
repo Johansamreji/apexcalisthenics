@@ -7,21 +7,18 @@
 * `app.js` $\rightarrow$ Frontend logic and API calls.
 
 
-* **GitHub Pages (Recommended):**
-* **Vercel / Netlify:** 
+* **GitHub Pages**
+* **Vercel / Netlify**
 
-### 2. Backend API: What Stack and Where to Host?
-
+### 2. Backend API
 #### Tech Stacks
 
 **Python (Flask / FastAPI)**
 
-#### Backend Hosting (Free)
-
+#### Backend Hosting
 * **Render.com**
   
 ### 3. Database: Setup and Hosting
-
 #### DB Structure
 **`Events`** (Title, Date, Venue, Max_Seats, Available_Seats) 
 **`Registrations`** (Student_Name, Reg_No, Event_ID).
