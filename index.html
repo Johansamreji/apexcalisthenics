@@ -4,29 +4,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus Event Management System</title>
+    <meta name="theme-color" content="#11141d">
+    <title>CampusLoop | Event Command Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Campus Event Management System</h1>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="view-events.html">View Events</a></li>
-            <li><a href="register.html">Register</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-    </nav>
-    <main>
-        <section>
-            <h2>Welcome to the Campus Event Management System</h2>
-            <p>Manage and track all campus events in one place.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Campus Event Management System | Under Construction</p>
-    </footer>
-</body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="app-shell">
+        <aside class="sidebar" id="sidebar">
+            <a class="brand" href="#top" aria-label="CampusLoop home">
+                <span class="brand-mark"><span></span><span></span><span></span></span>
+                <span>campus<span>loop</span></span>
+            </a>
+            <div class="sidebar-label">Workspace</div>
+            <nav class="side-nav" aria-label="Main navigation">
+                <a class="nav-item active" href="#overview" data-section="overview"><span class="nav-icon">◈</span>Overview</a>
+                <a class="nav-item" href="#discover" data-section="discover"><span class="nav-icon">⌕</span>Discover events</a>
+                <a class="nav-item" href="#schedule" data-section="schedule"><span class="nav-icon">▣</span>My schedule <b class="nav-count">3</b></a>
+                <a class="nav-item" href="#community" data-section="community"><span class="nav-icon">◎</span>Communities</a>
+            </nav>
+            <div class="sidebar-label">Manage</div>
+            <nav class="side-nav" aria-label="Management navigation">
+                <a class="nav-item admin-only" href="#admin" data-section="admin"><span class="nav-icon">◫</span>Admin console</a>
+                <a class="nav-item" href="#settings" data-section="settings"><span class="nav-icon">⚙</span>Settings</a>
+            </nav>
+            <div class="sidebar-bottom glass-panel">
+                <span class="mini-orbit">✦</span>
+                <strong>Make something happen.</strong>
+                <p>Bring your next campus idea to life.</p>
+                <button class="text-button" id="createEventButton">Create an event <span>↗</span></button>
+            </div>
+            <div class="profile-mini">
+                <div class="avatar avatar-yellow">AS</div>
+                <div><strong>Alex Sharma</strong><small>Student account</small></div>
+                <button class="icon-button" aria-label="More profile options">•••</button>
+            </div>
+        </aside>
 
+        <main class="main-content" id="top">
+            <header class="topbar">
+                <button class="icon-button menu-button" id="menuButton" aria-label="Open navigation">☰</button>
+                <div class="breadcrumb"><span>Workspace</span><b>/</b><strong>Overview</strong></div>
+                <div class="topbar-actions">
+                    <button class="icon-button notification-button" id="notificationButton" aria-label="Notifications">♢<i></i></button>
+                    <div class="divider"></div>
+                    <button class="profile-trigger" id="profileButton"><span class="avatar avatar-yellow">AS</span><span class="profile-trigger-text"><strong>Alex Sharma</strong><small>Student</small></span><span class="chevron">⌄</span></button>
+                </div>
+            </header>
+
+            <div class="content-wrap" id="overview">
+                <section class="welcome-row reveal">
+                    <div>
+                        <div class="eyebrow"><span class="live-dot"></span> Thursday, 12 September 2026</div>
+                        <h1>Good morning, Alex<span class="accent-dot">.</span></h1>
+                        <p class="lede">Your campus is buzzing. Here’s what’s worth showing up for.</p>
+                    </div>
+                    <div class="mode-switch glass-panel" role="group" aria-label="Portal mode">
+                        <button class="mode-button active" data-mode="student">Student portal</button>
+                        <button class="mode-button" data-mode="admin">Admin portal</button>
+                    </div>
+                </section>
+
+                <section class="hero-event glass-panel reveal delay-one">
+                    <div class="hero-copy">
+                        <span class="pill pill-coral">Featured this week</span>
+                        <h2>Build beyond<br><em>the syllabus.</em></h2>
+                        <p>Three days of makers, mentors and meaningful collisions at the annual campus innovation festival.</p>
+                        <div class="hero-meta"><span>◷ 18—20 Sep</span><span>⌖ Innovation Hall</span></div>
+                        <button class="button button-light register-button" data-event="Campus Innovate 2026">Reserve your spot <span>↗</span></button>
+                    </div>
+                    <div class="hero-art" aria-hidden="true">
+                        <div class="sun"></div><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="planet planet-a"></div><div class="planet planet-b"></div><div class="grid-floor"></div>
+                        <span class="art-label">CI<span>26</span></span>
+                    </div>
+                </section>
+
+                <section class="section-block reveal delay-two" id="discover">
+                    <div class="section-heading"><div><span class="eyebrow">Curated for you</span><h2>Don’t miss these</h2></div><a class="view-link" href="#all-events">View all <span>↗</span></a></div>
+                    <div class="filter-row"><div class="search-box"><span>⌕</span><input id="eventSearch" type="search" placeholder="Search events, clubs, people..." aria-label="Search events"></div><div class="filter-buttons"><button class="filter-button active" data-filter="all">All</button><button class="filter-button" data-filter="tech">Tech</button><button class="filter-button" data-filter="culture">Culture</button><button class="filter-button" data-filter="sports">Sports</button></div></div>
+                    <div class="event-grid" id="eventGrid">
+                        <article class="event-card event-tech" data-category="tech" data-search="design decode workshop technology">
+                            <div class="card-top"><span class="event-icon icon-lime">✦</span><span class="pill pill-lime">Tech & design</span><button class="bookmark" aria-label="Bookmark Design Decode">♡</button></div>
+                            <h3>Design Decode</h3><p class="event-description">A hands-on workshop on turning curious questions into better digital products.</p>
+                            <div class="event-details"><span>◷ Today, 4:00 PM</span><span>⌖ Block 38 · Studio 2</span></div><div class="card-footer"><div class="attendees"><span>MS</span><span>RK</span><span>+18</span></div><button class="small-button register-button" data-event="Design Decode">Join event <span>↗</span></button></div>
+                        </article>
+                        <article class="event-card event-culture" data-category="culture" data-search="open mic culture music poetry night">
+                            <div class="card-top"><span class="event-icon icon-pink">♫</span><span class="pill pill-pink">Culture</span><button class="bookmark" aria-label="Bookmark Open Mic After Dark">♡</button></div>
+                            <h3>Open Mic: After Dark</h3><p class="event-description">Poetry, acoustic sets and stories from the voices that make this place feel like home.</p>
+                            <div class="event-details"><span>◷ Fri, 7:30 PM</span><span>⌖ The Amphitheatre</span></div><div class="card-footer"><div class="attendees"><span>AJ</span><span>NP</span><span>+42</span></div><button class="small-button register-button" data-event="Open Mic: After Dark">Join event <span>↗</span></button></div>
+                        </article>
+                        <article class="event-card event-sports" data-category="sports" data-search="midnight futsal sports tournament">
+                            <div class="card-top"><span class="event-icon icon-blue">⚡</span><span class="pill pill-blue">Sports</span><button class="bookmark" aria-label="Bookmark Midnight Futsal">♡</button></div>
+                            <h3>Midnight Futsal</h3><p class="event-description">Fast feet, loud sidelines and a five-a-side tournament under the stadium lights.</p>
+                            <div class="event-details"><span>◷ Sat, 10:00 PM</span><span>⌖ North Sports Complex</span></div><div class="card-footer"><div class="attendees"><span>VS</span><span>+27</span></div><button class="small-button register-button" data-event="Midnight Futsal">Join event <span>↗</span></button></div>
+                        </article>
+                    </div>
+                    <p class="empty-state" id="emptyState">No events match that search.</p>
+                </section>
+
+                <section class="lower-grid reveal delay-three" id="schedule">
+                    <div class="schedule-panel glass-panel"><div class="section-heading"><div><span class="eyebrow">Your week</span><h2>Coming up</h2></div><button class="icon-button" aria-label="More schedule options">•••</button></div><div class="schedule-item"><time><b>13</b><span>SEP</span></time><div><strong>Product Club Hangout</strong><small>5:00 PM · The Commons</small></div><span class="status-dot"></span></div><div class="schedule-item"><time><b>15</b><span>SEP</span></time><div><strong>Photography Walk</strong><small>6:30 PM · East Gate</small></div><span class="status-dot orange"></span></div><div class="schedule-item"><time><b>18</b><span>SEP</span></time><div><strong>Campus Innovate 2026</strong><small>All day · Innovation Hall</small></div><span class="status-dot pink"></span></div></div>
+                    <div class="pulse-panel glass-panel"><div class="section-heading"><div><span class="eyebrow">Campus pulse</span><h2>Right now</h2></div><span class="pulse-live"><i></i> Live</span></div><div class="pulse-number">1,284 <span>people exploring</span></div><div class="pulse-bars"><i style="height: 34%"></i><i style="height: 52%"></i><i style="height: 42%"></i><i style="height: 68%"></i><i style="height: 55%"></i><i style="height: 83%"></i><i style="height: 72%"></i><i style="height: 94%"></i><i style="height: 78%"></i><i style="height: 100%"></i><i style="height: 88%"></i><i style="height: 76%"></i></div><div class="pulse-labels"><span>8 AM</span><span>Now</span></div></div>
+                </section>
+
+                <section class="admin-panel glass-panel" id="admin" hidden><div class="section-heading"><div><span class="eyebrow">Admin portal</span><h2>Event command center</h2></div><button class="button button-primary" id="adminCreateButton">+ Create event</button></div><div class="admin-stats"><div><span>Published events</span><strong>24</strong><small class="up">↑ 12% this month</small></div><div><span>Total registrations</span><strong>3,842</strong><small class="up">↑ 18% this month</small></div><div><span>Pending approvals</span><strong>07</strong><small class="attention">Needs review</small></div><div><span>Active communities</span><strong>38</strong><small>Across 6 schools</small></div></div><div class="admin-table"><div class="table-row table-head"><span>Event</span><span>Date</span><span>Registrations</span><span>Status</span></div><div class="table-row"><strong>Campus Innovate 2026</strong><span>18 Sep</span><span>486 / 600</span><b class="table-status live">Published</b></div><div class="table-row"><strong>Open Mic: After Dark</strong><span>13 Sep</span><span>142 / 200</span><b class="table-status live">Published</b></div><div class="table-row"><strong>Robotics Society Induction</strong><span>20 Sep</span><span>—</span><b class="table-status pending">Pending</b></div></div></section>
+            </div>
+            <footer><span>© 2026 CampusLoop</span><span>Made for curious campuses <b>✦</b></span></footer>
+        </main>
+    </div>
+
+    <div class="modal-backdrop" id="eventModal" hidden><div class="modal glass-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close icon-button" id="modalClose" aria-label="Close">×</button><span class="eyebrow">New event</span><h2 id="modalTitle">Create something worth attending.</h2><p>Keep it local, keep it memorable. This demo saves nothing to a server.</p><form id="eventForm"><label>Event name<input required type="text" placeholder="e.g. Sunset Sketch Club"></label><div class="form-row"><label>Date<input required type="date"></label><label>Time<input required type="time"></label></div><label>Event type<select><option>Tech & design</option><option>Culture</option><option>Sports</option><option>Community</option></select></label><button class="button button-primary" type="submit">Publish locally <span>↗</span></button></form></div></div>
+    <div class="toast" id="toast"><span>✦</span><p></p></div>
+    <script src="script.js"></script>
+</body>
 </html>
