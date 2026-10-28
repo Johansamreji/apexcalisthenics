@@ -5,503 +5,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Calisthenics Progression Ladder</title>
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --primary: #4F46E5;
-            --primary-hover: #4338CA;
-            --locked-filter: grayscale(100%) opacity(70%);
-            --transition-speed: 0.3s;
-        }
 
-        body {
-            background-color: #0F172A;
-            /* slate-900 */
-            color: #F8FAFC;
-            /* slate-50 */
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-
-        .progression-card {
-            transition: all var(--transition-speed) ease-in-out;
-        }
-
-        .progression-card.unlocked {
-            border: 2px solid var(--primary);
-            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.5), 0 2px 4px -1px rgba(79, 70, 229, 0.3);
-        }
-
-        .progression-card.unlocked:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.6), 0 4px 6px -2px rgba(79, 70, 229, 0.4);
-        }
-
-        .progression-card.locked {
-            filter: var(--locked-filter);
-            border: 2px dashed #475569;
-            /* slate-600 */
-            cursor: not-allowed;
-        }
-
-        /* Glassmorphism utility */
-        .glass-panel {
-            background: rgba(30, 41, 59, 0.7);
-            /* slate-800 */
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-glass {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Subtle glow animation for unlocks */
-        @keyframes subtle-glow {
-
-            0%,
-            100% {
-                box-shadow: 0 0 10px rgba(79, 70, 229, 0.2);
-            }
-
-            50% {
-                box-shadow: 0 0 20px rgba(79, 70, 229, 0.5);
-            }
-        }
-    </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#4F46E5',
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- External CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="min-h-screen flex flex-col">
+<body>
 
-    <header class="sticky top-0 z-50 nav-glass">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                </svg>
-                <h1
-                    class="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
-                    Calisthenics Ladder
-                </h1>
+    <!-- Semantic Header with Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">💪</span>
+                <h1 class="text-xl font-bold tracking-wide">Calisthenics Ladder</h1>
             </div>
             <div class="flex items-center gap-2">
-                <span class="text-sm text-slate-300 hidden sm:inline">Current Rank:</span>
-                <span id="current-rank-badge"
-                    class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 transition-all duration-300">
-                    Novice
-                </span>
+                <span class="text-sm text-slate-400">Current Rank:</span>
+                <span id="current-rank-badge" class="rank-badge">Novice</span>
             </div>
         </nav>
     </header>
 
-    <main class="flex-grow container mx-auto px-6 py-8 flex flex-col gap-12">
+    <!-- Semantic Main Content -->
+    <main class="max-w-6xl mx-auto p-6 flex flex-col gap-10 flex-grow w-full">
 
-        <section aria-labelledby="ladder-heading" class="flex flex-col gap-6">
-            <div class="flex flex-col gap-2">
-                <h2 id="ladder-heading" class="text-3xl font-bold text-white">Progression Ladder</h2>
-                <p class="text-slate-400">Master each movement with 15+ reps to unlock the next level.</p>
+        <!-- Section 1: Progression Ladder -->
+        <section aria-labelledby="ladder-heading">
+            <div class="mb-4">
+                <h2 id="ladder-heading" class="text-2xl font-bold text-white">Progression Ladder</h2>
+                <p class="text-slate-400 text-sm">Hit 15 or more reps on your current level to unlock the next exercise!</p>
             </div>
 
-            <div id="progression-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-                <!-- Javascript will inject the level articles here -->
+            <!-- Responsive CSS Grid for Cards -->
+            <div id="progression-grid" class="ladder-grid">
+                <!-- Javascript will inject 5 article cards here -->
             </div>
         </section>
 
-        <section aria-labelledby="log-heading" class="max-w-3xl mx-auto w-full">
-            <div class="glass-panel rounded-2xl p-8 shadow-2xl relative overflow-hidden">
-                <div
-                    class="absolute -top-32 -right-32 w-64 h-64 bg-indigo-600 rounded-full mix-blend-multiply filter blur-[80px] opacity-20">
-                </div>
-
-                <h2 id="log-heading" class="text-2xl font-bold mb-6 text-white flex items-center gap-2">
-                    <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                    Log Workout
+        <!-- Section 2: Workout Logging Form -->
+        <section aria-labelledby="form-heading" class="max-w-2xl mx-auto w-full">
+            <div class="form-card">
+                <h2 id="form-heading" class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <span>📝</span> Log Your Workout
                 </h2>
 
-                <form id="workout-form" class="flex flex-col gap-5">
-                    <div class="flex flex-col sm:flex-row gap-5">
-                        <div class="flex-1 flex flex-col gap-2">
-                            <label for="exercise" class="text-sm font-medium text-slate-300">Exercise</label>
-                            <select id="exercise" required
-                                class="bg-slate-900 border border-slate-700 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 transition-colors">
-                                <option value="1">Wall Push-Ups</option>
-                                <option value="2" disabled>Incline Push-Ups</option>
-                                <option value="3" disabled>Standard Push-Ups</option>
-                                <option value="4" disabled>Diamond Push-Ups</option>
-                                <option value="5" disabled>Pike Push-Ups</option>
+                <!-- Form using CSS Flexbox for Alignment -->
+                <form id="workout-form" class="form-flex">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="exercise">Exercise</label>
+                            <select id="exercise" required>
+                                <option value="1">1. Wall Push-Ups</option>
+                                <option value="2" disabled>2. Incline Push-Ups 🔒</option>
+                                <option value="3" disabled>3. Standard Push-Ups 🔒</option>
+                                <option value="4" disabled>4. Diamond Push-Ups 🔒</option>
+                                <option value="5" disabled>5. Pike Push-Ups 🔒</option>
                             </select>
                         </div>
-                        <div class="flex-1 flex flex-col gap-2">
-                            <label for="workout-date" class="text-sm font-medium text-slate-300">Date</label>
-                            <input type="date" id="workout-date" required
-                                class="bg-slate-900 border border-slate-700 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 transition-colors" />
+                        <div class="form-group">
+                            <label for="workout-date">Date</label>
+                            <input type="date" id="workout-date" required>
                         </div>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row gap-5">
-                        <div class="flex-1 flex flex-col gap-2">
-                            <label for="sets" class="text-sm font-medium text-slate-300">Sets</label>
-                            <input type="number" id="sets" min="1" placeholder="e.g. 3" class="bg-slate-900 border border-slate-700 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 transition-colors" />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sets">Sets (completed)</label>
+                            <input type="number" id="sets" min="1" placeholder="e.g. 3" required>
                         </div>
-                        <div class="flex-1 flex flex-col gap-2">
-                            <label for="reps" class="text-sm font-medium text-slate-300">Reps (per set)</label>
-                            <input type="number" id="reps" min="1" placeholder="e.g. 15" class="bg-slate-900 border border-slate-700 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 transition-colors" />
+                        <div class="form-group">
+                            <label for="reps">Reps (per set)</label>
+                            <input type="number" id="reps" min="1" placeholder="e.g. 15" required>
                         </div>
                     </div>
 
-                    <button type="submit"
-                        class="mt-4 w-full text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-500/50 font-medium rounded-lg text-sm px-5 py-3.5 text-center transition-all duration-300 shadow-lg shadow-indigo-500/30 flex justify-center items-center gap-2 group">
-                        <span>Save Workout</span>
-                        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                        </svg>
-                    </button>
-
-                    <div id="form-message"
-                        class="text-sm text-center hidden mt-2 rounded-lg p-3 font-medium transition-all"></div>
+                    <button type="submit" class="btn-primary mt-2">Save Workout</button>
+                    
+                    <div id="form-message" class="message-box"></div>
                 </form>
             </div>
         </section>
 
-        <section aria-labelledby="history-heading" class="max-w-3xl mx-auto w-full mb-8">
-            <h2 id="history-heading" class="text-2xl font-bold mb-4 text-white">Recent Workouts</h2>
-            <div id="history-list" class="flex flex-col gap-3">
-                <!-- Javascript will inject history items -->
+        <!-- Section 3: Workout History -->
+        <section aria-labelledby="history-heading" class="max-w-2xl mx-auto w-full">
+            <h2 id="history-heading" class="text-xl font-bold mb-4 flex items-center gap-2">
+                <span>📋</span> Recent Workout History
+            </h2>
+            <div id="history-list">
+                <!-- Workout logs injected here by JavaScript -->
             </div>
         </section>
 
     </main>
 
-    <footer class="mt-auto border-t border-slate-800 bg-slate-900/50">
-        <div class="container mx-auto px-6 py-8 text-center text-slate-500 text-sm flex justify-between items-center">
-            <p>&copy; <span id="year"></span> Calisthenics Ladder</p>
-            <p class="italic text-slate-600">Push your limits.</p>
-        </div>
+    <!-- Semantic Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-6 text-center text-sm text-slate-500">
+        <p>&copy; <span id="current-year"></span> Calisthenics Progression Ladder. Stay consistent!</p>
     </footer>
 
-    <script>
-        /**
-         * Configuration & Data
-         */
-        const LEVELS = [
-            { id: 1, name: "Wall Push-Ups", rank: "Novice", targetReq: 15 },
-            { id: 2, name: "Incline Push-Ups", rank: "Beginner", targetReq: 15 },
-            { id: 3, name: "Standard Push-Ups", rank: "Intermediate", targetReq: 15 },
-            { id: 4, name: "Diamond Push-Ups", rank: "Advanced", targetReq: 15 },
-            { id: 5, name: "Pike Push-Ups", rank: "Elite", targetReq: null } // Max level
-        ];
-
-        const REQ_THRESHOLD = 15;
-
-        let state = {
-            unlockedLevelId: 1,
-            history: []
-        };
-
-        /**
-         * DOM Elements
-         */
-        const gridEl = document.getElementById('progression-grid');
-        const exerciseSelectEl = document.getElementById('exercise');
-        const dateInputEl = document.getElementById('workout-date');
-        const formEl = document.getElementById('workout-form');
-        const historyListEl = document.getElementById('history-list');
-        const rankBadgeEl = document.getElementById('current-rank-badge');
-        const formMessageEl = document.getElementById('form-message');
-
-        /**
-         * Initialization
-         */
-        function init() {
-            // Setup current date & year
-            dateInputEl.valueAsDate = new Date();
-            document.getElementById('year').textContent = new Date().getFullYear();
-
-            loadState();
-            renderApp();
-        }
-
-        function renderApp() {
-            renderLadder();
-            populateDropdown();
-            renderHistory();
-            updateRankBadge();
-        }
-
-        /**
-         * Storage
-         */
-        function loadState() {
-            try {
-                const savedState = localStorage.getItem('calisthenics_state');
-                if (savedState) {
-                    state = JSON.parse(savedState);
-                }
-            } catch (err) {
-                console.error("Failed to load state", err);
-            }
-        }
-
-        function saveState() {
-            try {
-                localStorage.setItem('calisthenics_state', JSON.stringify(state));
-            } catch (err) {
-                console.warn("Failed to save state to localStorage (this is normal if running from a local file:// URL with strict privacy settings)", err);
-            }
-        }
-
-        /**
-         * Rendering Functions
-         */
-        function renderLadder() {
-            gridEl.innerHTML = '';
-
-            LEVELS.forEach(level => {
-                const isUnlocked = level.id <= state.unlockedLevelId;
-                const isCurrentLevel = level.id === state.unlockedLevelId;
-
-                const article = document.createElement('article');
-                article.className = `progression-card rounded-2xl p-6 flex flex-col h-full bg-slate-800/80 backdrop-blur-sm relative overflow-hidden ${isUnlocked ? 'unlocked' : 'locked'}`;
-
-                if (isCurrentLevel) {
-                    article.style.animation = 'subtle-glow 3s infinite';
-                }
-
-                let iconHtml = '';
-                if (isUnlocked) {
-                    iconHtml = \`
-                        <div class="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center text-indigo-400 mb-5 shadow-[0_0_15px_rgba(99,102,241,0.3)]">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
-                        </div>
-                    \`;
-                } else {
-                    iconHtml = \`
-                        <div class="w-12 h-12 rounded-xl bg-slate-700/50 flex items-center justify-center text-slate-400 mb-5">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                            </svg>
-                        </div>
-                    \`;
-                }
-
-                const titleHtml = \`<h3 class="text-xl font-bold text-white mb-1">\${level.name}</h3>\`;
-                const rankHtml = \`<p class="text-sm text-indigo-400 font-medium mb-4">\${level.rank}</p>\`;
-                
-                let actionHtml = '';
-                if (isUnlocked) {
-                    actionHtml = \`
-                        <div class="mt-auto pt-4 border-t border-slate-700/50">
-                            <button onclick="selectExercise(\${level.id})" class="w-full py-2.5 bg-slate-700/50 hover:bg-indigo-600 text-white rounded-lg transition-colors duration-200 text-sm font-medium border border-slate-600 hover:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50">
-                                Log Workout
-                            </button>
-                        </div>
-                    \`;
-                } else {
-                    const prevLevel = LEVELS.find(l => l.id === level.id - 1);
-                    actionHtml = \`
-                        <div class="mt-auto pt-4">
-                            <p class="text-xs text-slate-400 bg-slate-900/80 p-3 rounded-lg text-center border border-slate-700">
-                                Target: \${prevLevel ? prevLevel.targetReq : 15} Reps on \${prevLevel ? prevLevel.name : 'previous level'} to unlock.
-                            </p>
-                        </div>
-                    \`;
-                }
-
-                article.innerHTML = iconHtml + titleHtml + rankHtml + actionHtml;
-                gridEl.appendChild(article);
-            });
-        }
-
-        function populateDropdown() {
-            Array.from(exerciseSelectEl.options).forEach(option => {
-                const levelId = parseInt(option.value);
-                option.disabled = levelId > state.unlockedLevelId;
-            });
-            // Select highest unlocked level by default
-            exerciseSelectEl.value = state.unlockedLevelId;
-        }
-        
-        function updateRankBadge() {
-            const currentLevel = LEVELS.find(l => l.id === state.unlockedLevelId);
-            if (currentLevel) {
-                rankBadgeEl.textContent = currentLevel.rank;
-                
-                // Pop animation
-                rankBadgeEl.classList.remove('scale-100');
-                rankBadgeEl.classList.add('scale-110', 'bg-indigo-500', 'text-white', 'shadow-[0_0_15px_rgba(99,102,241,0.5)]');
-                
-                setTimeout(() => {
-                    rankBadgeEl.classList.remove('scale-110', 'bg-indigo-500', 'text-white', 'shadow-[0_0_15px_rgba(99,102,241,0.5)]');
-                    rankBadgeEl.classList.add('scale-100');
-                }, 400);
-            }
-        }
-
-        function renderHistory() {
-            historyListEl.innerHTML = '';
-            
-            if (state.history.length === 0) {
-                historyListEl.innerHTML = \`
-                    <div class="glass-panel rounded-xl p-8 text-center text-slate-400 border border-slate-700 border-dashed">
-                        <svg class="w-12 h-12 mx-auto mb-3 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        <p class="text-sm font-medium">No workouts logged yet. Time to get moving!</p>
-                    </div>
-                \`;
-                return;
-            }
-
-            // Reverse to show latest first, slice last 5
-            const recentHistory = [...state.history].reverse().slice(0, 5); 
-            
-            recentHistory.forEach(record => {
-                const level = LEVELS.find(l => l.id === record.levelId);
-                const isPR = record.reps >= REQ_THRESHOLD;
-                
-                const item = document.createElement('div');
-                item.className = \`glass-panel rounded-xl p-5 flex justify-between items-center transition-all duration-300 hover:bg-slate-800 border-l-4 \${isPR ? 'border-l-emerald-500' : 'border-l-indigo-500'}\`;
-                
-                // Format Date nicely
-                const recordDate = new Date(record.date);
-                // Adjust for local timezone to prevent off-by-one errors from string parsing
-                const userTimezoneOffset = recordDate.getTimezoneOffset() * 60000;
-                const adjustedDate = new Date(recordDate.getTime() + userTimezoneOffset);
-                const formattedDate = adjustedDate.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
-
-                item.innerHTML = \`
-                    <div>
-                        <h4 class="font-bold text-white text-base tracking-wide">\${level ? level.name : 'Unknown'}</h4>
-                        <p class="text-xs text-slate-400 mt-0.5 flex items-center gap-1">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            \${formattedDate}
-                        </p>
-                    </div>
-                    <div class="text-right flex flex-col items-end gap-1">
-                        <p class="font-mono font-bold text-lg text-white bg-slate-900/50 px-3 py-1 rounded-md border border-slate-700/50">
-                            \${record.sets} <span class="text-slate-500 text-sm">×</span> \${record.reps}
-                        </p>
-                        \${isPR ? \`<span class="text-[10px] uppercase tracking-wider font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full border border-emerald-500/20">Target Met</span>\` : ''}
-                    </div>
-                \`;
-                historyListEl.appendChild(item);
-            });
-        }
-
-        /**
-         * Event Handlers
-         */
-        window.selectExercise = function(levelId) {
-            exerciseSelectEl.value = levelId;
-            exerciseSelectEl.focus();
-            document.getElementById('log-heading').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        };
-
-        function showMessage(msg, isSuccess = true) {
-            formMessageEl.innerHTML = msg;
-            formMessageEl.className = \`text-sm text-center mt-4 rounded-lg p-3 font-medium block shadow-lg border backdrop-blur-sm \${
-                isSuccess 
-                    ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30' 
-                    : 'bg-red-500/10 text-red-300 border-red-500/30'
-            }\`;
-            
-            setTimeout(() => {
-                formMessageEl.classList.add('hidden');
-                formMessageEl.classList.remove('block');
-            }, 6000);
-        }
-
-        formEl.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const levelId = parseInt(exerciseSelectEl.value);
-            const date = dateInputEl.value;
-            const setsRaw = document.getElementById('sets').value;
-            const repsRaw = document.getElementById('reps').value;
-
-            if (!setsRaw || !repsRaw) {
-                showMessage(`
-                    <div class="flex items-center justify-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Please enter valid numbers for Sets and Reps.
-                    </div>
-                `, false);
-                return;
-            }
-
-            const sets = parseInt(setsRaw);
-            const reps = parseInt(repsRaw);
-            
-            const level = LEVELS.find(l => l.id === levelId);
-            
-            // Log to History
-            state.history.push({
-                id: Date.now(),
-                levelId,
-                date,
-                sets,
-                reps
-            });
-            
-            let message = \`
-                <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    Logged: \${sets} sets of \${reps} \${level.name}. Great job!
-                </div>
-            \`;
-            
-            // Progression Logic
-            if (reps >= REQ_THRESHOLD && levelId === state.unlockedLevelId && state.unlockedLevelId < LEVELS.length) {
-                state.unlockedLevelId++;
-                const newLevel = LEVELS.find(l => l.id === state.unlockedLevelId);
-                
-                message = \`
-                    <div class="flex items-center justify-center gap-2">
-                        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        <span class="font-bold text-white">LEVEL UP!</span> You unlocked \${newLevel.name}!
-                    </div>
-                \`;
-                
-                // Add a visual flash effect to the body for a "Wow" factor
-                const flash = document.createElement('div');
-                flash.className = 'fixed inset-0 bg-indigo-500/20 z-[100] pointer-events-none transition-opacity duration-1000';
-                document.body.appendChild(flash);
-                setTimeout(() => flash.style.opacity = '0', 50);
-                setTimeout(() => flash.remove(), 1050);
-            }
-            
-            saveState();
-            renderApp();
-            showMessage(message, true);
-            
-            // Reset numerical inputs
-            document.getElementById('sets').value = '';
-            document.getElementById('reps').value = '';
-        });
-
-        // Run
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
+    <!-- External JavaScript File -->
+    <script src="script.js"></script>
 </body>
 
 </html>
