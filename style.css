@@ -4,11 +4,9 @@
 
 /* CSS Variables */
 :root {
-    --primary-color: #6366f1;
-    /* Indigo */
+    --primary-color: #6366f1;       /* Indigo */
     --primary-hover: #4f46e5;
-    --bg-color: #0f172a;
-    /* Dark Slate */
+    --bg-color: #0f172a;            /* Dark Slate */
     --card-bg: #1e293b;
     --card-border: #334155;
     --text-main: #f8fafc;
@@ -187,11 +185,6 @@ body {
     transform: translateX(4px);
 }
 
-/* Visibility Utility */
-.hidden {
-    display: none !important;
-}
-
 .btn-danger {
     background-color: #ef4444;
     color: white;
@@ -206,93 +199,6 @@ body {
 
 .btn-danger:hover {
     background-color: #dc2626;
-}
-
-/* Modal Overlay (dimmed background) */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-/* Hide when inactive */
-.modal-overlay.hidden {
-    display: none;
-}
-
-/* Modal Content Box */
-.modal-box {
-    background-color: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    max-width: 420px;
-    width: 90%;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    position: relative;
-}
-
-/* Circular Timer in Top Right of Modal */
-.timer-circle-wrap {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    width: 38px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.timer-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-    /* Start at 12 o'clock */
-}
-
-.timer-track {
-    stroke: #334155;
-}
-
-.timer-fill {
-    stroke: #10b981;
-    /* Emerald Green */
-    stroke-dasharray: 88;
-    stroke-dashoffset: 0;
-}
-
-/* Deplete ring from 100% to 0% */
-@keyframes timer-deplete {
-    from {
-        stroke-dashoffset: 0;
-    }
-
-    to {
-        stroke-dashoffset: 88;
-    }
-}
-
-.timer-fill.animating {
-    animation: timer-deplete 3s linear forwards;
-}
-
-.timer-number {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--text-main);
-    position: relative;
-    z-index: 1;
 }
 
 /* Message Box */
@@ -331,4 +237,67 @@ body {
 
 .history-item.target-met {
     border-left-color: #10b981;
+}
+
+/* Modal Overlay (dimmed background) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Hide when inactive */
+.modal-overlay.hidden,
+.hidden {
+    display: none !important;
+}
+
+/* Modal Content Box */
+.modal-box {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Modal Overlay (dimmed background) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Hide when inactive */
+.modal-overlay.hidden,
+.hidden {
+    display: none !important;
+}
+
+/* Modal Content Box */
+.modal-box {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
