@@ -4,9 +4,11 @@
 
 /* CSS Variables */
 :root {
-    --primary-color: #6366f1;       /* Indigo */
+    --primary-color: #6366f1;
+    /* Indigo */
     --primary-hover: #4f46e5;
-    --bg-color: #0f172a;            /* Dark Slate */
+    --bg-color: #0f172a;
+    /* Dark Slate */
     --card-bg: #1e293b;
     --card-border: #334155;
     --text-main: #f8fafc;
