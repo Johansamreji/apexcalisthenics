@@ -158,17 +158,38 @@ body {
 .btn-secondary {
     background-color: #334155;
     color: white;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0.85rem;
     border-radius: 6px;
     font-size: 0.875rem;
     font-weight: 500;
     cursor: pointer;
     border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     transition: background-color var(--transition-speed);
 }
 
 .btn-secondary:hover {
     background-color: var(--primary-color);
+}
+
+.card .btn-secondary {
+    justify-content: center;
+}
+
+.arrow {
+    display: inline-block;
+    transition: transform var(--transition-speed);
+}
+
+.card .btn-secondary:hover .arrow {
+    transform: translateX(4px);
+}
+
+/* Visibility Utility */
+.hidden {
+    display: none !important;
 }
 
 .btn-danger {
@@ -215,6 +236,63 @@ body {
     max-width: 420px;
     width: 90%;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+/* Circular Timer in Top Right of Modal */
+.timer-circle-wrap {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    /* Start at 12 o'clock */
+}
+
+.timer-track {
+    stroke: #334155;
+}
+
+.timer-fill {
+    stroke: #10b981;
+    /* Emerald Green */
+    stroke-dasharray: 88;
+    stroke-dashoffset: 0;
+}
+
+/* Deplete ring from 100% to 0% */
+@keyframes timer-deplete {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: 88;
+    }
+}
+
+.timer-fill.animating {
+    animation: timer-deplete 3s linear forwards;
+}
+
+.timer-number {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-main);
+    position: relative;
+    z-index: 1;
 }
 
 /* Message Box */

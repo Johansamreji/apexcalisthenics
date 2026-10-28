@@ -32,6 +32,14 @@ const formMessageEl = document.getElementById('form-message');
 const modalEl = document.getElementById('confirm-modal');
 const cancelResetBtn = document.getElementById('cancel-reset-btn');
 const confirmResetBtn = document.getElementById('confirm-reset-btn');
+const homeViewEl = document.getElementById('home-view');
+const logViewEl = document.getElementById('log-view');
+const successModalEl = document.getElementById('success-modal');
+const successModalTitleEl = document.getElementById('success-modal-title');
+const successModalDescEl = document.getElementById('success-modal-desc');
+const successEmojiEl = document.getElementById('success-emoji');
+const timerCircleEl = document.getElementById('timer-circle');
+const timerSecondsEl = document.getElementById('timer-seconds');
 
 // 2. LocalStorage Helpers
 function loadStateFromStorage() {
@@ -74,8 +82,9 @@ function renderLadder() {
                     <p class="text-xs text-indigo-400 font-semibold uppercase tracking-wider mb-4">${level.rank}</p>
                     <p class="text-xs text-slate-300 mb-4">Status: <span class="text-emerald-400 font-semibold">Unlocked ✅</span></p>
                 </div>
-                <button type="button" onclick="selectForLog(${level.id})" class="btn-secondary w-full">
-                    Log Workout
+                <button type="button" onclick="selectForLog(${level.id})" class="btn-secondary w-full justify-center">
+                    <span>Log Workout</span>
+                    <span class="arrow">→</span>
                 </button>
             `;
         } else {
@@ -216,11 +225,25 @@ modalEl.addEventListener('click', function (event) {
     }
 });
 
-// 4. User Interaction Helpers
-function selectForLog(levelId) {
-    exerciseSelectEl.value = levelId;
-    formEl.scrollIntoView({ behavior: 'smooth' });
+// 4. Navigation & View Switching
+function showHomeView() {
+    homeViewEl.classList.remove('hidden');
+    logViewEl.classList.add('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showLogView(levelId) {
+    if (levelId) {
+        exerciseSelectEl.value = levelId;
+    }
+    homeViewEl.classList.add('hidden');
+    logViewEl.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setsInputEl.focus();
+}
+
+function selectForLog(levelId) {
+    showLogView(levelId);
 }
 
 function displayMessage(text, isSuccess) {
@@ -231,6 +254,61 @@ function displayMessage(text, isSuccess) {
     setTimeout(() => {
         formMessageEl.style.display = 'none';
     }, 4500);
+}
+
+// Timer references for Success Modal
+let successTimerTimeout = null;
+let successTimerInterval = null;
+
+// Dismiss success modal immediately if user clicks "Return Now"
+function dismissSuccessModalEarly() {
+    clearTimeout(successTimerTimeout);
+    clearInterval(successTimerInterval);
+    if (successModalEl) {
+        successModalEl.classList.add('hidden');
+    }
+    showHomeView();
+}
+window.dismissSuccessModalEarly = dismissSuccessModalEarly;
+
+// Show Success Popup Modal with Circular Countdown Timer (100% to 0%)
+function showSuccessModal(title, message, emoji) {
+    if (!successModalEl) return;
+
+    successModalTitleEl.textContent = title;
+    successModalDescEl.textContent = message;
+    successEmojiEl.textContent = emoji || '🎉';
+
+    let remainingSeconds = 3;
+    timerSecondsEl.textContent = remainingSeconds;
+
+    // Reset and trigger circle depleting animation (100% to 0%)
+    timerCircleEl.classList.remove('animating');
+    void timerCircleEl.offsetWidth; // Force CSS reflow to restart animation
+    timerCircleEl.classList.add('animating');
+
+    // Show the modal
+    successModalEl.classList.remove('hidden');
+
+    // Countdown the numeric display every second: 3 -> 2 -> 1 -> 0
+    clearInterval(successTimerInterval);
+    successTimerInterval = setInterval(() => {
+        remainingSeconds--;
+        if (remainingSeconds >= 1) {
+            timerSecondsEl.textContent = remainingSeconds;
+        } else {
+            timerSecondsEl.textContent = '0';
+            clearInterval(successTimerInterval);
+        }
+    }, 1000);
+
+    // After 3 seconds (when ring reaches 0%), close modal & return to main ladder page
+    clearTimeout(successTimerTimeout);
+    successTimerTimeout = setTimeout(() => {
+        clearInterval(successTimerInterval);
+        successModalEl.classList.add('hidden');
+        showHomeView();
+    }, 3000);
 }
 
 // 5. Form Submit Event Handler
@@ -260,13 +338,17 @@ formEl.addEventListener('submit', function (event) {
     };
     state.history.push(newRecord);
 
+    let successTitle = "Workout Logged! ✅";
+    let successEmoji = "💪";
     let feedbackText = `Logged ${sets} sets of ${reps} ${currentLevel ? currentLevel.name : 'reps'}!`;
 
     // Check if user reached progression threshold to unlock the next level
     if (reps >= TARGET_REPS && levelId === state.unlockedLevelId && state.unlockedLevelId < LEVELS.length) {
         state.unlockedLevelId++;
         const unlockedLevel = LEVELS.find(l => l.id === state.unlockedLevelId);
-        feedbackText = `🎉 LEVEL UP! You reached ${reps} reps and unlocked ${unlockedLevel.name}!`;
+        successTitle = "LEVEL UP! 🎉";
+        successEmoji = "🏆";
+        feedbackText = `Outstanding! You reached ${reps} reps and unlocked ${unlockedLevel.name}!`;
     }
 
     // Save state & re-render UI
@@ -276,12 +358,12 @@ formEl.addEventListener('submit', function (event) {
     renderHistory();
     updateRankBadge();
 
-    // Show feedback message
-    displayMessage(feedbackText, true);
-
     // Clear sets and reps inputs for next entry
     setsInputEl.value = '';
     repsInputEl.value = '';
+
+    // Show popup modal with circular countdown timer (100% to 0%) before returning
+    showSuccessModal(successTitle, feedbackText, successEmoji);
 });
 
 // 6. Page Initialization
