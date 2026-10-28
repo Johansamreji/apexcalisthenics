@@ -29,6 +29,9 @@ const formEl = document.getElementById('workout-form');
 const historyListEl = document.getElementById('history-list');
 const rankBadgeEl = document.getElementById('current-rank-badge');
 const formMessageEl = document.getElementById('form-message');
+const modalEl = document.getElementById('confirm-modal');
+const cancelResetBtn = document.getElementById('cancel-reset-btn');
+const confirmResetBtn = document.getElementById('confirm-reset-btn');
 
 // 2. LocalStorage Helpers
 function loadStateFromStorage() {
@@ -166,6 +169,52 @@ function renderHistory() {
         historyListEl.appendChild(div);
     });
 }
+
+// Open Custom Reset Modal
+function openResetModal() {
+    modalEl.classList.remove('hidden');
+}
+
+// Close Custom Reset Modal
+function closeResetModal() {
+    modalEl.classList.add('hidden');
+}
+
+// Perform reset when user confirms in the modal
+function performReset() {
+    // Reset state back to initial values
+    state.unlockedLevelId = 1;
+    state.history = [];
+
+    // Save reset state to localStorage
+    saveStateToStorage();
+
+    // Re-render the interface to show reset state
+    renderLadder();
+    populateDropdown();
+    renderHistory();
+    updateRankBadge();
+
+    // Close the modal
+    closeResetModal();
+
+    // Show a message to confirm
+    displayMessage("All workout history and progress have been reset!", true);
+}
+
+// Alias resetData to openResetModal for backward compatibility
+const resetData = openResetModal;
+
+// Modal Event Listeners
+cancelResetBtn.addEventListener('click', closeResetModal);
+confirmResetBtn.addEventListener('click', performReset);
+
+// Close modal if user clicks on the darkened backdrop outside the box
+modalEl.addEventListener('click', function (event) {
+    if (event.target === modalEl) {
+        closeResetModal();
+    }
+});
 
 // 4. User Interaction Helpers
 function selectForLog(levelId) {
