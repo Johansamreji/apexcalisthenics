@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Calisthenics Progression Ladder</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- External CSS Stylesheet -->
+    <link rel="stylesheet" href="old_style.css">
+</head>
+
+<body>
+
+    <!-- Semantic Header with Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">💪</span>
+                <h1 class="text-xl font-bold tracking-wide">Calisthenics Ladder</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="text-sm text-slate-400">Current Rank:</span>
+                <span id="current-rank-badge" class="rank-badge">Novice</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Semantic Main Content -->
+    <main class="max-w-6xl mx-auto p-6 flex flex-col gap-10 flex-grow w-full">
+
+        <!-- Section 1: Progression Ladder -->
+        <section aria-labelledby="ladder-heading">
+            <div class="mb-4">
+                <h2 id="ladder-heading" class="text-2xl font-bold text-white">Progression Ladder</h2>
+                <p class="text-slate-400 text-sm">Hit 15 or more reps on your current level to unlock the next exercise!
+                </p>
+            </div>
+
+            <!-- Responsive CSS Grid for Cards -->
+            <div id="progression-grid" class="ladder-grid">
+                <!-- Javascript will inject 5 article cards here -->
+            </div>
+        </section>
+
+        <!-- Section 2: Workout Logging Form -->
+        <section aria-labelledby="form-heading" class="max-w-2xl mx-auto w-full">
+            <div class="form-card">
+                <h2 id="form-heading" class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <span>📝</span> Log Your Workout
+                </h2>
+
+                <!-- Form using CSS Flexbox for Alignment -->
+                <form id="workout-form" class="form-flex">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="exercise">Exercise</label>
+                            <select id="exercise" required>
+                                <option value="1">1. Wall Push-Ups</option>
+                                <option value="2" disabled>2. Incline Push-Ups 🔒</option>
+                                <option value="3" disabled>3. Standard Push-Ups 🔒</option>
+                                <option value="4" disabled>4. Diamond Push-Ups 🔒</option>
+                                <option value="5" disabled>5. Pike Push-Ups 🔒</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="workout-date">Date</label>
+                            <input type="date" id="workout-date" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sets">Sets (completed)</label>
+                            <input type="number" id="sets" min="1" placeholder="e.g. 3" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reps">Reps (per set)</label>
+                            <input type="number" id="reps" min="1" placeholder="e.g. 15" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary mt-2">Save Workout</button>
+
+                    <div id="form-message" class="message-box"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Section 3: Workout History -->
+        <section aria-labelledby="history-heading" class="max-w-2xl mx-auto w-full">
+            <h2 id="history-heading" class="text-xl font-bold mb-4 flex items-center gap-2">
+                <span>📋</span> Recent Workout History
+            </h2>
+            <div id="history-list">
+                <!-- Workout logs injected here by JavaScript -->
+            </div>
+            <button type="button" onclick="openResetModal()" class="btn-danger w-full mt-6">Reset All Data</button>
+        </section>
+
+    </main>
+
+    <!-- Semantic Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-6 text-center text-sm text-slate-500">
+        <p>&copy; <span id="current-year"></span> Calisthenics Progression Ladder. Stay consistent!</p>
+    </footer>
+
+    <!-- Custom Confirmation Modal (Website Native) -->
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                <span>⚠️</span> Reset All Data?
+            </h3>
+            <p class="text-sm text-slate-400 mb-6">
+                Are you sure you want to reset all your workout history and progress? This cannot be undone.
+            </p>
+            <div class="flex gap-3 justify-end">
+                <button type="button" id="cancel-reset-btn" class="btn-secondary">Cancel</button>
+                <button type="button" id="confirm-reset-btn" class="btn-danger">Yes, Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- External JavaScript File -->
+    <script src="old_script.js"></script>
+</body>
+
+</html>
