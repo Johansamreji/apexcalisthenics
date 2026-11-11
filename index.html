@@ -6,12 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apex Calisthenics | Enterprise Progression Platform</title>
 
+    <!-- Google Fonts: Inter (400 Regular, 500 Medium, 600 Semi-Bold, 700 Bold) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace']
+                    },
                     colors: {
                         brandDark: '#0b0f19',
                         brandSurface: '#111827',
@@ -29,7 +38,7 @@
     </script>
 
     <!-- External Custom Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=3.1">
+    <link rel="stylesheet" href="style.css?v=3.2">
 </head>
 
 <body class="bg-[#0b0f19] text-slate-100 antialiased min-h-screen flex flex-col md:flex-row">
@@ -562,7 +571,7 @@
     </div>
 
     <!-- External Script with Cache-Buster -->
-    <script src="script.js?v=3.1"></script>
+    <script src="script.js?v=3.2"></script>
 </body>
 
 </html>

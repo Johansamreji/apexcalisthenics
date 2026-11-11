@@ -1,7 +1,13 @@
 /* ==========================================================================
    Apex Calisthenics - Enterprise Design System (style.css)
    Clean, Solid Professional Dark Theme (No Gradients, High Contrast)
+   Premium SaaS Typography Stack: Google Fonts 'Inter' with Robust Fallbacks
    ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. Font Import: Google Fonts 'Inter' (Weights 400, 500, 600, 700)
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* --------------------------------------------------------------------------
    1. Root Variables & Solid Color Architecture
@@ -20,6 +26,10 @@
     --accent-warning: #f59e0b;
     --accent-danger: #ef4444;
     
+    /* SaaS Typography Stack: Inter with graceful degradation to native system fonts */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
     /* Typography Colors */
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
@@ -42,8 +52,36 @@
 body {
     background-color: var(--bg-base);
     color: var(--text-primary);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-sans);
+    font-size-adjust: from-font; /* Modern CSS: Normalizes x-height during font load to prevent CLS layout shift */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11'; /* Premium SaaS Inter features: clarified glyphs, open digits */
+    letter-spacing: -0.011em; /* High-end SaaS typography tracking */
+    line-height: 1.5;
     overflow-x: hidden;
+}
+
+/* Inherit typography across all interactive and input elements */
+button, input, select, textarea {
+    font-family: inherit;
+}
+
+/* Heading Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    letter-spacing: -0.022em;
+    text-wrap: balance; /* Modern CSS: Prevents orphan words in headings */
+}
+
+/* Monospace & Tabular Data Alignment */
+.font-mono,
+code,
+kbd,
+samp {
+    font-family: var(--font-mono);
+    font-feature-settings: "tnum" 1; /* Tabular numbers for clean numeric column alignment */
 }
 
 /* Custom Clean Scrollbar */
@@ -197,7 +235,8 @@ body {
 .stat-value {
     font-size: 1.35rem;
     font-weight: 800;
-    font-family: monospace;
+    font-family: var(--font-mono);
+    font-feature-settings: "tnum" 1;
     letter-spacing: -0.02em;
 }
 
