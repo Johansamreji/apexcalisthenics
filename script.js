@@ -149,6 +149,18 @@ const TAB_TITLES = {
     history: "Training Logs & Settings"
 };
 
+function toggleSidebar(forceState) {
+    const sidebar = document.getElementById('sidebar-nav');
+    const backdrop = document.getElementById('sidebar-backdrop');
+    if (!sidebar) return;
+
+    const isOpen = typeof forceState === 'boolean' ? forceState : !sidebar.classList.contains('open');
+    sidebar.classList.toggle('open', isOpen);
+    if (backdrop) {
+        backdrop.classList.toggle('hidden', !isOpen);
+    }
+}
+
 function switchTab(tabId) {
     if (!tabId || !document.getElementById(`section-${tabId}`)) {
         tabId = 'dashboard';
@@ -156,6 +168,9 @@ function switchTab(tabId) {
 
     appState.activeTab = tabId;
     saveState();
+
+    // Close mobile sidebar drawer if open
+    toggleSidebar(false);
 
     // 1. Update Section Visibility
     document.querySelectorAll('.tab-pane').forEach(section => {
@@ -711,6 +726,7 @@ window.openWipeModal = openWipeModal;
 window.closeWipeModal = closeWipeModal;
 window.confirmWipeData = confirmWipeData;
 window.closeLevelupModal = closeLevelupModal;
+window.toggleSidebar = toggleSidebar;
 
 // Bootstrap on DOM ready (handles cached scripts and deferred loading)
 if (document.readyState === 'loading') {

@@ -28,23 +28,32 @@
     </script>
 
     <!-- Custom Premium Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=2.2">
+    <link rel="stylesheet" href="style.css?v=2.3">
 </head>
 
 <body class="bg-darkBg text-slate-100 antialiased min-h-screen flex flex-col md:flex-row">
 
-    <!-- Desktop Sidebar Navigation -->
-    <nav id="sidebar-nav" class="hidden md:flex flex-col w-64 bg-[#0d1322] border-r border-slate-800/80 p-5 shrink-0 z-30 sticky top-0 h-screen justify-between">
+    <!-- Mobile Drawer Backdrop Overlay -->
+    <div id="sidebar-backdrop" onclick="toggleSidebar(false)" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 hidden md:hidden transition-opacity"></div>
+
+    <!-- Sidebar Navigation (Desktop Fixed, Mobile Collapsible Drawer) -->
+    <nav id="sidebar-nav" class="flex flex-col w-64 bg-[#0d1322] border-r border-slate-800/80 p-5 shrink-0 z-50 sticky top-0 h-screen justify-between" aria-label="Sidebar Navigation">
         <div class="flex flex-col gap-8">
-            <!-- App Branding -->
-            <div class="flex items-center gap-3 px-2 pt-1">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center text-slate-950 font-black text-xl shadow-[0_0_20px_rgba(0,245,255,0.4)]">
-                    ⚡
+            <!-- App Branding & Mobile Close Button -->
+            <div class="flex items-center justify-between px-2 pt-1">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center text-slate-950 font-black text-xl shadow-[0_0_20px_rgba(0,245,255,0.4)]">
+                        ⚡
+                    </div>
+                    <div>
+                        <h1 class="text-base font-extrabold tracking-wider uppercase text-white font-mono leading-none">Apex Ladder</h1>
+                        <span class="text-[11px] font-semibold text-cyan-400 tracking-widest uppercase">Calisthenics Pro</span>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="text-base font-extrabold tracking-wider uppercase text-white font-mono leading-none">Apex Ladder</h1>
-                    <span class="text-[11px] font-semibold text-cyan-400 tracking-widest uppercase">Calisthenics Pro</span>
-                </div>
+                <!-- Close Button on Mobile Drawer -->
+                <button type="button" onclick="toggleSidebar(false)" class="md:hidden w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center text-xs font-bold" aria-label="Close Sidebar">
+                    ✕
+                </button>
             </div>
 
             <!-- Profile / Overall Rank Pill -->
@@ -95,12 +104,16 @@
     <div class="flex-1 flex flex-col min-w-0 pb-20 md:pb-6">
 
         <!-- Header Bar -->
-        <header class="h-16 border-b border-slate-800/80 bg-[#0b101c]/90 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-20">
+        <header class="h-16 border-b border-slate-800/80 bg-[#0b101c]/90 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-20">
             <div class="flex items-center gap-3">
-                <div class="md:hidden w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center text-slate-950 font-black text-sm">
+                <!-- Hamburger Menu Button for Mobile/Tablet -->
+                <button type="button" onclick="toggleSidebar()" class="md:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cyan-500/50 transition-all" aria-label="Toggle Sidebar Menu">
+                    <span class="text-base font-bold">☰</span>
+                </button>
+                <div class="hidden sm:flex md:hidden w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-emerald-400 items-center justify-center text-slate-950 font-black text-sm">
                     ⚡
                 </div>
-                <h2 id="top-bar-title" class="text-lg font-bold text-white tracking-wide">Dashboard & Progression</h2>
+                <h2 id="top-bar-title" class="text-base sm:text-lg font-bold text-white tracking-wide truncate">Dashboard & Progression</h2>
             </div>
             <div class="flex items-center gap-4">
                 <div class="hidden sm:flex items-center gap-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg text-xs font-mono text-slate-300">
@@ -200,6 +213,14 @@
 
             <!-- TAB 2: EXERCISE LIBRARY -->
             <section id="section-library" class="tab-pane" aria-labelledby="library-heading">
+                <!-- Back to Dashboard Quick Action -->
+                <div class="mb-5">
+                    <button type="button" onclick="switchTab('dashboard')" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 bg-slate-900/90 hover:bg-slate-800 hover:text-white border border-slate-700/80 transition-all shadow-sm group">
+                        <span class="text-cyan-400 group-hover:-translate-x-1 transition-transform">←</span>
+                        <span>Back to Dashboard</span>
+                    </button>
+                </div>
+
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                     <div>
                         <h3 id="library-heading" class="text-xl sm:text-2xl font-black text-white tracking-tight">Calisthenics Movement Library</h3>
@@ -227,6 +248,14 @@
             <!-- TAB 3: LOG WORKOUT FORM -->
             <section id="section-log" class="tab-pane" aria-labelledby="log-heading">
                 <div class="max-w-2xl mx-auto">
+                    <!-- Back to Dashboard Quick Action -->
+                    <div class="mb-5">
+                        <button type="button" onclick="switchTab('dashboard')" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 bg-slate-900/90 hover:bg-slate-800 hover:text-white border border-slate-700/80 transition-all shadow-sm group">
+                            <span class="text-cyan-400 group-hover:-translate-x-1 transition-transform">←</span>
+                            <span>Back to Dashboard</span>
+                        </button>
+                    </div>
+
                     <div class="mb-6">
                         <h3 id="log-heading" class="text-xl sm:text-2xl font-black text-white tracking-tight">Log Completed Workout</h3>
                         <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Submit sets and repetitions to advance your progression ladder. Hit the rep threshold to unlock the next level.</p>
@@ -295,6 +324,14 @@
 
             <!-- TAB 4: WORKOUT HISTORY & SETTINGS -->
             <section id="section-history" class="tab-pane" aria-labelledby="history-heading">
+                <!-- Back to Dashboard Quick Action -->
+                <div class="mb-5">
+                    <button type="button" onclick="switchTab('dashboard')" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 bg-slate-900/90 hover:bg-slate-800 hover:text-white border border-slate-700/80 transition-all shadow-sm group">
+                        <span class="text-cyan-400 group-hover:-translate-x-1 transition-transform">←</span>
+                        <span>Back to Dashboard</span>
+                    </button>
+                </div>
+
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                     <div>
                         <h3 id="history-heading" class="text-xl sm:text-2xl font-black text-white tracking-tight">Workout History & Logs</h3>
@@ -407,7 +444,7 @@
     </div>
 
     <!-- External Script with Cache-Buster -->
-    <script src="script.js?v=2.2"></script>
+    <script src="script.js?v=2.3"></script>
 </body>
 
 </html>
