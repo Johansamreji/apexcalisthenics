@@ -4,127 +4,409 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Calisthenics Progression Ladder</title>
+    <title>Apex Calisthenics | Progression Ladder & Workout Tracker</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#090d16',
+                        cardBg: '#111827',
+                        cardBorder: '#1f293d',
+                        accent: '#00f5ff',
+                        accentGlow: 'rgba(0, 245, 255, 0.25)',
+                        neonLime: '#10b981',
+                        neonPurple: '#a855f7',
+                        neonAmber: '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
 
-    <!-- External CSS Stylesheet -->
+    <!-- Custom Premium Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="bg-darkBg text-slate-100 antialiased min-h-screen flex flex-col md:flex-row">
 
-    <!-- Semantic Header with Navbar -->
-    <header>
-        <nav class="navbar">
-            <div class="flex items-center gap-2">
-                <span class="text-2xl">💪</span>
-                <h1 class="text-xl font-bold tracking-wide">Calisthenics Ladder</h1>
-            </div>
-            <div class="flex items-center gap-2">
-                <span class="text-sm text-slate-400">Current Rank:</span>
-                <span id="current-rank-badge" class="rank-badge">Novice</span>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Semantic Main Content -->
-    <main class="max-w-6xl mx-auto p-6 flex flex-col gap-10 flex-grow w-full">
-
-        <!-- Section 1: Progression Ladder -->
-        <section aria-labelledby="ladder-heading">
-            <div class="mb-4">
-                <h2 id="ladder-heading" class="text-2xl font-bold text-white">Progression Ladder</h2>
-                <p class="text-slate-400 text-sm">Hit 15 or more reps on your current level to unlock the next exercise!
-                </p>
+    <!-- Desktop Sidebar Navigation -->
+    <nav id="sidebar-nav" class="hidden md:flex flex-col w-64 bg-[#0d1322] border-r border-slate-800/80 p-5 shrink-0 z-30 sticky top-0 h-screen justify-between">
+        <div class="flex flex-col gap-8">
+            <!-- App Branding -->
+            <div class="flex items-center gap-3 px-2 pt-1">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center text-slate-950 font-black text-xl shadow-[0_0_20px_rgba(0,245,255,0.4)]">
+                    ⚡
+                </div>
+                <div>
+                    <h1 class="text-base font-extrabold tracking-wider uppercase text-white font-mono leading-none">Apex Ladder</h1>
+                    <span class="text-[11px] font-semibold text-cyan-400 tracking-widest uppercase">Calisthenics Pro</span>
+                </div>
             </div>
 
-            <!-- Responsive CSS Grid for Cards -->
-            <div id="progression-grid" class="ladder-grid">
-                <!-- Javascript will inject 5 article cards here -->
+            <!-- Profile / Overall Rank Pill -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3 flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Athlete Tier</p>
+                    <p id="overall-rank-badge" class="text-xs font-bold text-cyan-300 font-mono">Novice Recruit</p>
+                </div>
+                <div class="w-8 h-8 rounded-lg bg-cyan-950/70 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-sm">
+                    🏆
+                </div>
             </div>
-        </section>
 
-        <!-- Section 2: Workout Logging Form -->
-        <section aria-labelledby="form-heading" class="max-w-2xl mx-auto w-full">
-            <div class="form-card">
-                <h2 id="form-heading" class="text-xl font-bold mb-4 flex items-center gap-2">
-                    <span>📝</span> Log Your Workout
-                </h2>
+            <!-- Navigation Links -->
+            <div class="flex flex-col gap-1.5" role="tablist" aria-label="Main Navigation">
+                <button type="button" class="nav-tab-btn active flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all text-left group" data-tab="dashboard">
+                    <span class="text-lg group-hover:scale-110 transition-transform">📊</span>
+                    <span>Dashboard</span>
+                </button>
+                <button type="button" class="nav-tab-btn flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all text-left group" data-tab="library">
+                    <span class="text-lg group-hover:scale-110 transition-transform">📚</span>
+                    <span>Exercise Library</span>
+                </button>
+                <button type="button" class="nav-tab-btn flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all text-left group" data-tab="log">
+                    <span class="text-lg group-hover:scale-110 transition-transform">✍️</span>
+                    <span>Log Workout</span>
+                </button>
+                <button type="button" class="nav-tab-btn flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all text-left group" data-tab="history">
+                    <span class="text-lg group-hover:scale-110 transition-transform">📜</span>
+                    <span>History</span>
+                </button>
+            </div>
+        </div>
 
-                <!-- Form using CSS Flexbox for Alignment -->
-                <form id="workout-form" class="form-flex">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="exercise">Exercise</label>
-                            <select id="exercise" required>
-                                <option value="1">1. Wall Push-Ups</option>
-                                <option value="2" disabled>2. Incline Push-Ups 🔒</option>
-                                <option value="3" disabled>3. Standard Push-Ups 🔒</option>
-                                <option value="4" disabled>4. Diamond Push-Ups 🔒</option>
-                                <option value="5" disabled>5. Pike Push-Ups 🔒</option>
-                            </select>
+        <!-- Sidebar Footer Status -->
+        <div class="border-t border-slate-800/80 pt-4 px-2">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Storage Sync</span>
+                <span class="flex items-center gap-1.5 text-emerald-400 font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Local Active
+                </span>
+            </div>
+            <p class="text-[11px] text-slate-500 mt-2">Vanilla JS Web Storage API</p>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col min-w-0 pb-20 md:pb-6">
+
+        <!-- Header Bar -->
+        <header class="h-16 border-b border-slate-800/80 bg-[#0b101c]/90 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-20">
+            <div class="flex items-center gap-3">
+                <div class="md:hidden w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center text-slate-950 font-black text-sm">
+                    ⚡
+                </div>
+                <h2 id="top-bar-title" class="text-lg font-bold text-white tracking-wide">Dashboard & Progression</h2>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg text-xs font-mono text-slate-300">
+                    <span class="text-slate-500">Total Logged:</span>
+                    <span id="quick-workout-count" class="font-bold text-cyan-400">0</span>
+                </div>
+                <button type="button" onclick="switchTab('log')" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs uppercase tracking-wider px-3.5 py-2 rounded-lg flex items-center gap-1.5 shadow-[0_0_15px_rgba(0,245,255,0.3)] transition-all">
+                    <span>+</span> Log Set
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Workspace: Semantic Sections for Multi-Tab SPA -->
+        <main class="p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto flex-1">
+
+            <!-- TAB 1: DASHBOARD (PROGRESSION LADDER) -->
+            <section id="section-dashboard" class="tab-pane active" aria-labelledby="dashboard-heading">
+                <!-- Overview Stats Grid -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <article class="stat-card">
+                        <span class="stat-label">Total Workouts</span>
+                        <div class="flex items-baseline gap-2 mt-1">
+                            <span id="stat-total-workouts" class="stat-value text-white">0</span>
+                            <span class="text-xs text-slate-500">sessions</span>
                         </div>
-                        <div class="form-group">
-                            <label for="workout-date">Date</label>
-                            <input type="date" id="workout-date" required>
+                    </article>
+                    <article class="stat-card">
+                        <span class="stat-label">Total Volume</span>
+                        <div class="flex items-baseline gap-2 mt-1">
+                            <span id="stat-total-reps" class="stat-value text-cyan-400">0</span>
+                            <span class="text-xs text-slate-500">reps</span>
                         </div>
+                    </article>
+                    <article class="stat-card">
+                        <span class="stat-label">Unlocked Mastery</span>
+                        <div class="flex items-baseline gap-2 mt-1">
+                            <span id="stat-unlocked-count" class="stat-value text-emerald-400">4</span>
+                            <span class="text-xs text-slate-500">/ 20 levels</span>
+                        </div>
+                    </article>
+                    <article class="stat-card">
+                        <span class="stat-label">Overall Rank</span>
+                        <div class="flex items-baseline gap-2 mt-1">
+                            <span id="stat-overall-rank" class="text-lg sm:text-xl font-bold font-mono text-purple-400 truncate">Novice</span>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Category Progression Selector -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 id="dashboard-heading" class="text-xl sm:text-2xl font-black text-white tracking-tight">Progression Ladders</h3>
+                        <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Select a movement discipline to inspect milestone tiers and unlock requirements.</p>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="sets">Sets (completed)</label>
-                            <input type="number" id="sets" min="1" placeholder="e.g. 3" required>
+                    <!-- Category Pills -->
+                    <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0" role="tablist" aria-label="Movement Categories">
+                        <button type="button" class="cat-pill active" onclick="switchCategory('push')">
+                            <span>⚡</span> Push
+                        </button>
+                        <button type="button" class="cat-pill" onclick="switchCategory('pull')">
+                            <span>🧗</span> Pull
+                        </button>
+                        <button type="button" class="cat-pill" onclick="switchCategory('core')">
+                            <span>🔥</span> Core
+                        </button>
+                        <button type="button" class="cat-pill" onclick="switchCategory('legs')">
+                            <span>🦵</span> Legs
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Category Banner & Summary -->
+                <div id="category-summary-banner" class="bg-gradient-to-r from-slate-900 to-slate-900/60 border border-slate-800 rounded-2xl p-5 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span id="cat-banner-icon" class="text-2xl">⚡</span>
+                            <h4 id="cat-banner-title" class="text-lg font-bold text-white">Push Discipline</h4>
+                            <span id="cat-banner-badge" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Tier 1 Unlocked</span>
                         </div>
-                        <div class="form-group">
-                            <label for="reps">Reps (per set)</label>
-                            <input type="number" id="reps" min="1" placeholder="e.g. 15" required>
+                        <p id="cat-banner-desc" class="text-xs text-slate-400 mt-1 max-w-2xl">Upper body pushing strength foundation: progressing from incline wall push-ups to advanced planche control.</p>
+                    </div>
+                    <div class="flex flex-col sm:items-end gap-1 shrink-0">
+                        <span class="text-xs text-slate-400 font-mono">Discipline Mastery</span>
+                        <div class="w-48 h-2.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700">
+                            <div id="cat-progress-bar" class="h-full bg-gradient-to-r from-cyan-500 to-emerald-400 rounded-full transition-all duration-500" style="width: 20%;"></div>
                         </div>
+                        <span id="cat-progress-text" class="text-[11px] font-mono text-cyan-400">1 of 5 Unlocked (20%)</span>
+                    </div>
+                </div>
+
+                <!-- Progression Ladder Cards Grid -->
+                <div id="ladder-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <!-- Injected via script.js -->
+                </div>
+            </section>
+
+            <!-- TAB 2: EXERCISE LIBRARY -->
+            <section id="section-library" class="tab-pane" aria-labelledby="library-heading">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 id="library-heading" class="text-xl sm:text-2xl font-black text-white tracking-tight">Calisthenics Movement Library</h3>
+                        <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Comprehensive database of calisthenics exercises with targeted muscle anatomies and execution cues.</p>
                     </div>
 
-                    <button type="submit" class="btn-primary mt-2">Save Workout</button>
+                    <!-- Filter Controls -->
+                    <div class="flex items-center gap-3">
+                        <select id="library-filter" onchange="filterLibrary()" class="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-xl px-3.5 py-2.5 focus:border-cyan-400 outline-none">
+                            <option value="all">All Disciplines (20 Exercises)</option>
+                            <option value="push">Push Progression</option>
+                            <option value="pull">Pull Progression</option>
+                            <option value="core">Core Progression</option>
+                            <option value="legs">Legs Progression</option>
+                        </select>
+                    </div>
+                </div>
 
-                    <div id="form-message" class="message-box"></div>
-                </form>
+                <!-- Exercise Library Responsive Grid -->
+                <div id="library-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+                    <!-- Injected via script.js -->
+                </div>
+            </section>
+
+            <!-- TAB 3: LOG WORKOUT FORM -->
+            <section id="section-log" class="tab-pane" aria-labelledby="log-heading">
+                <div class="max-w-2xl mx-auto">
+                    <div class="mb-6">
+                        <h3 id="log-heading" class="text-xl sm:text-2xl font-black text-white tracking-tight">Log Completed Workout</h3>
+                        <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Submit sets and repetitions to advance your progression ladder. Hit the rep threshold to unlock the next level.</p>
+                    </div>
+
+                    <!-- Workout Form Container with Flexbox Alignment -->
+                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+                        <div class="absolute -top-32 -right-32 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                        <form id="workout-form" class="flex flex-col gap-5">
+                            
+                            <!-- Category and Exercise Dropdowns -->
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <div class="flex-1 flex flex-col gap-1.5">
+                                    <label for="form-category" class="form-label">Discipline / Category</label>
+                                    <select id="form-category" required class="form-input" onchange="handleFormCategoryChange()">
+                                        <option value="push">Push Progression</option>
+                                        <option value="pull">Pull Progression</option>
+                                        <option value="core">Core Progression</option>
+                                        <option value="legs">Legs Progression</option>
+                                    </select>
+                                </div>
+                                <div class="flex-1 flex flex-col gap-1.5">
+                                    <label for="form-exercise" class="form-label">Target Exercise</label>
+                                    <select id="form-exercise" required class="form-input">
+                                        <!-- Dynamically populated -->
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Sets, Reps & Date Inputs -->
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <div class="flex-1 flex flex-col gap-1.5">
+                                    <label for="form-sets" class="form-label">Sets Completed</label>
+                                    <input type="number" id="form-sets" min="1" required placeholder="e.g. 3" class="form-input">
+                                </div>
+                                <div class="flex-1 flex flex-col gap-1.5">
+                                    <label for="form-reps" class="form-label">Reps (Best Set)</label>
+                                    <input type="number" id="form-reps" min="1" required placeholder="e.g. 15" class="form-input">
+                                </div>
+                                <div class="flex-1 flex flex-col gap-1.5">
+                                    <label for="form-date" class="form-label">Workout Date</label>
+                                    <!-- Max attribute dynamically set to today's date -->
+                                    <input type="date" id="form-date" required class="form-input">
+                                </div>
+                            </div>
+
+                            <!-- Optional Notes -->
+                            <div class="flex flex-col gap-1.5">
+                                <label for="form-notes" class="form-label">Athlete Session Notes (Optional)</label>
+                                <input type="text" id="form-notes" placeholder="e.g. Strict form, no kipping, 90s rest intervals" class="form-input">
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="mt-3 w-full bg-gradient-to-r from-cyan-500 to-emerald-400 hover:from-cyan-400 hover:to-emerald-300 text-slate-950 font-extrabold text-sm uppercase tracking-wider py-3.5 px-6 rounded-xl shadow-[0_0_20px_rgba(0,245,255,0.3)] transition-all flex items-center justify-center gap-2">
+                                <span>Save Workout & Verify Progression</span>
+                                <span>→</span>
+                            </button>
+
+                            <!-- Inline Form Message Notification -->
+                            <div id="form-feedback" class="hidden rounded-xl p-4 text-xs font-medium text-center transition-all"></div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: WORKOUT HISTORY & SETTINGS -->
+            <section id="section-history" class="tab-pane" aria-labelledby="history-heading">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 id="history-heading" class="text-xl sm:text-2xl font-black text-white tracking-tight">Workout History & Logs</h3>
+                        <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Chronological record of all logged training sessions stored in your browser's LocalStorage.</p>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <select id="history-filter" onchange="renderHistory()" class="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-xl px-3.5 py-2.5 focus:border-cyan-400 outline-none">
+                            <option value="all">All Movements</option>
+                            <option value="push">Push Only</option>
+                            <option value="pull">Pull Only</option>
+                            <option value="core">Core Only</option>
+                            <option value="legs">Legs Only</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- History Records List -->
+                <div id="history-list" class="flex flex-col gap-3 mb-10">
+                    <!-- Injected via script.js -->
+                </div>
+
+                <!-- Settings & Danger Zone Area -->
+                <div class="border-t border-slate-800 pt-8 mt-12">
+                    <div class="bg-rose-950/20 border border-rose-900/40 rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <h4 class="text-sm font-bold text-rose-300 uppercase tracking-wider flex items-center gap-2">
+                                <span>⚠️</span> Data Management & Reset Zone
+                            </h4>
+                            <p class="text-xs text-slate-400 mt-1 max-w-xl">
+                                Resetting will delete all logged workout records and return all categories to Level 1. This action cannot be reversed.
+                            </p>
+                        </div>
+                        <button type="button" onclick="openWipeModal()" class="bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shrink-0 shadow-lg shadow-rose-900/30">
+                            Wipe All Data
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Semantic Footer -->
+        <footer class="border-t border-slate-800/80 bg-[#0b101c] py-6 px-6 text-center text-xs text-slate-500">
+            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+                <p>&copy; <span id="current-year"></span> Apex Calisthenics Architecture. Vanilla HTML5, Tailwind CSS & JavaScript.</p>
+                <p class="text-cyan-400 font-mono text-[11px]">Strict Client Validation & Web Storage API</p>
             </div>
-        </section>
+        </footer>
+    </div>
 
-        <!-- Section 3: Workout History -->
-        <section aria-labelledby="history-heading" class="max-w-2xl mx-auto w-full">
-            <h2 id="history-heading" class="text-xl font-bold mb-4 flex items-center gap-2">
-                <span>📋</span> Recent Workout History
-            </h2>
-            <div id="history-list">
-                <!-- Workout logs injected here by JavaScript -->
+    <!-- Mobile Bottom Navigation Bar (Visible on mobile/tablet) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[#0d1322]/95 backdrop-blur-lg border-t border-slate-800 py-2 px-4 z-40 flex justify-around items-center">
+        <button type="button" class="mobile-nav-btn active flex flex-col items-center gap-1 text-slate-400" data-tab="dashboard">
+            <span class="text-lg">📊</span>
+            <span class="text-[10px] font-semibold">Ladder</span>
+        </button>
+        <button type="button" class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="library">
+            <span class="text-lg">📚</span>
+            <span class="text-[10px] font-semibold">Library</span>
+        </button>
+        <button type="button" class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="log">
+            <span class="text-lg">✍️</span>
+            <span class="text-[10px] font-semibold">Log</span>
+        </button>
+        <button type="button" class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="history">
+            <span class="text-lg">📜</span>
+            <span class="text-[10px] font-semibold">History</span>
+        </button>
+    </nav>
+
+    <!-- Custom Native Modal: Wipe All Data Confirmation -->
+    <div id="wipe-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="wipe-modal-title">
+        <div class="modal-card">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-xl font-bold border border-rose-500/30">
+                    ⚠️
+                </div>
+                <div>
+                    <h3 id="wipe-modal-title" class="text-lg font-bold text-white">Confirm Total Wipeout</h3>
+                    <p class="text-xs text-slate-400">Irreversible LocalStorage purge</p>
+                </div>
             </div>
-            <button type="button" onclick="openResetModal()" class="btn-danger w-full mt-6">Reset All Data</button>
-        </section>
-
-    </main>
-
-    <!-- Semantic Footer -->
-    <footer class="bg-slate-900 border-t border-slate-800 py-6 text-center text-sm text-slate-500">
-        <p>&copy; <span id="current-year"></span> Calisthenics Progression Ladder. Stay consistent!</p>
-    </footer>
-
-    <!-- Custom Confirmation Modal (Website Native) -->
-    <div id="confirm-modal" class="modal-overlay hidden">
-        <div class="modal-box">
-            <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                <span>⚠️</span> Reset All Data?
-            </h3>
-            <p class="text-sm text-slate-400 mb-6">
-                Are you sure you want to reset all your workout history and progress? This cannot be undone.
+            <p class="text-xs text-slate-300 leading-relaxed mb-6">
+                Are you completely sure you want to delete all logged workout records and reset all progression ladders back to Novice Level 1? This action cannot be undone.
             </p>
-            <div class="flex gap-3 justify-end">
-                <button type="button" id="cancel-reset-btn" class="btn-secondary">Cancel</button>
-                <button type="button" id="confirm-reset-btn" class="btn-danger">Yes, Reset</button>
+            <div class="flex items-center justify-end gap-3">
+                <button type="button" onclick="closeWipeModal()" class="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 transition-all">
+                    Cancel
+                </button>
+                <button type="button" onclick="confirmWipeData()" class="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-500 shadow-lg shadow-rose-900/30 transition-all">
+                    Yes, Purge Everything
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- External JavaScript File -->
+    <!-- Celebration Level-Up Modal -->
+    <div id="levelup-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+        <div class="modal-card text-center relative overflow-hidden">
+            <div class="text-5xl mb-3 animate-bounce">🏆</div>
+            <h3 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-300 to-purple-400 mb-1">LEVEL UP ACHIEVED!</h3>
+            <p id="levelup-details" class="text-xs text-slate-300 mb-6 max-w-sm mx-auto leading-relaxed">
+                Outstanding dedication! You conquered the required reps threshold and unlocked the next tier in your progression ladder.
+            </p>
+            <button type="button" onclick="closeLevelupModal()" class="w-full bg-gradient-to-r from-cyan-500 to-emerald-400 hover:from-cyan-400 hover:to-emerald-300 text-slate-950 font-black text-xs uppercase tracking-wider py-3.5 rounded-xl shadow-[0_0_20px_rgba(0,245,255,0.4)] transition-all">
+                Continue Training 🔥
+            </button>
+        </div>
+    </div>
+
+    <!-- External Script -->
     <script src="script.js"></script>
 </body>
 
