@@ -38,39 +38,50 @@
     </script>
 
     <!-- External Custom Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=3.2">
+    <link rel="stylesheet" href="style.css?v=3.3">
 </head>
 
 <body class="bg-[#0b0f19] text-slate-100 antialiased min-h-screen flex flex-col md:flex-row">
 
     <!-- Audio Element for Success Sound Trigger -->
     <audio id="success-audio" preload="auto">
-        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVoGAACBhYqFbF1fdJivrJBhNjVgodDbqWE1MV6e3/PkpmU4NFmd1+7vr2s9N12b0+fvs3FFPV2Z0ePrtnVIQFyXzuHquH1SSV2Vyd7puoNaTVuRx9nlso5kUFqMwdPhro9pUViIvdHgspFuU1aEvcvcr5RxVFSCucjYqJJzVlJ/t8LQo5Z3WFJ8scDOoZd6WlJ5rsDMoZh8W1N3rL7LoZp+XFR1qbvKn5yAXlRyprbJn56BYFRvpLLIn6CDYlRto67HoKOFY1Vrn6rGoKSGZVVpnKjFoaeIZ1VnmKXEoaiKZ1Vll6PDoqmNaFdklZ/BoquPaldjj5y9oayRa1dhi5q6n6uUbFdfh5S3nKuWbllce4+zm6qYb1pbd4iumaiab1xZcX2omKWccF5Wb3Wfl6OecWBVaXCam6CgcWRTZWqXmJ2hc2VRY2STlpudcmZPXl+OlJmcc2hNWVqKkZeacmlMV1eFj5SZb2tKVFOCjJKXa25JUk5+i5CWanBJUEt6h42TZ3FHT0h1hImPZXJGTkZxg4eMZHVFS0Jsf4SIY3dESUBpfH6FYHlDRj5le3t/XntCQTtfeHd7W35BPjlbdnN1V4FAPTVZcW5vU4NAPDJWbmloTYVAMzBUaWRiSIlAMi9SZ2FcQ41ALyxPX1tWQI9AJypLWFROPY9AIyc/UkpIPY9AIx05TUpFPI5AIhU0R0Q+OI1AIAsvQTw2MYs/GQMmNzctJ4c9FgAWLiYdHHU3EAAAFxMQBx5pLQ==" type="audio/wav">
+        <source
+            src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVoGAACBhYqFbF1fdJivrJBhNjVgodDbqWE1MV6e3/PkpmU4NFmd1+7vr2s9N12b0+fvs3FFPV2Z0ePrtnVIQFyXzuHquH1SSV2Vyd7puoNaTVuRx9nlso5kUFqMwdPhro9pUViIvdHgspFuU1aEvcvcr5RxVFSCucjYqJJzVlJ/t8LQo5Z3WFJ8scDOoZd6WlJ5rsDMoZh8W1N3rL7LoZp+XFR1qbvKn5yAXlRyprbJn56BYFRvpLLIn6CDYlRto67HoKOFY1Vrn6rGoKSGZVVpnKjFoaeIZ1VnmKXEoaiKZ1Vll6PDoqmNaFdklZ/BoquPaldjj5y9oayRa1dhi5q6n6uUbFdfh5S3nKuWbllce4+zm6qYb1pbd4iumaiab1xZcX2omKWccF5Wb3Wfl6OecWBVaXCam6CgcWRTZWqXmJ2hc2VRY2STlpudcmZPXl+OlJmcc2hNWVqKkZeacmlMV1eFj5SZb2tKVFOCjJKXa25JUk5+i5CWanBJUEt6h42TZ3FHT0h1hImPZXJGTkZxg4eMZHVFS0Jsf4SIY3dESUBpfH6FYHlDRj5le3t/XntCQTtfeHd7W35BPjlbdnN1V4FAPTVZcW5vU4NAPDJWbmloTYVAMzBUaWRiSIlAMi9SZ2FcQ41ALyxPX1tWQI9AJypLWFROPY9AIyc/UkpIPY9AIx05TUpFPI5AIhU0R0Q+OI1AIAsvQTw2MYs/GQMmNzctJ4c9FgAWLiYdHHU3EAAAFxMQBx5pLQ=="
+            type="audio/wav">
     </audio>
 
     <!-- Mobile Drawer Backdrop Overlay -->
-    <div id="sidebar-backdrop" onclick="toggleSidebar(false)" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden md:hidden transition-opacity"></div>
+    <div id="sidebar-backdrop" onclick="toggleSidebar(false)"
+        class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden md:hidden transition-opacity"></div>
 
     <!-- Semantic Navigation Sidebar -->
-    <nav id="sidebar-nav" class="flex flex-col w-64 bg-[#111827] border-r border-[#1f293d] p-5 shrink-0 z-50 sticky top-0 h-screen justify-between" aria-label="Main Navigation">
+    <nav id="sidebar-nav"
+        class="flex flex-col w-64 bg-[#111827] border-r border-[#1f293d] p-5 shrink-0 z-50 sticky top-0 h-screen justify-between"
+        aria-label="Main Navigation">
         <div class="flex flex-col gap-6">
             <!-- App Branding -->
             <div class="flex items-center justify-between px-2 pt-1 border-b border-[#1f293d] pb-4">
                 <div class="flex items-center gap-3">
                     <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
                     <div>
-                        <h1 class="text-sm font-bold tracking-wider uppercase text-white font-mono leading-none">Apex Ladder</h1>
+                        <h1 class="text-sm font-bold tracking-wider uppercase text-white font-mono leading-none">Apex
+                            Ladder</h1>
                         <span class="text-[11px] font-medium text-slate-400">Calisthenics System</span>
                     </div>
                 </div>
                 <!-- Mobile Close Button -->
-                <button type="button" onclick="toggleSidebar(false)" class="md:hidden w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center text-xs font-bold" aria-label="Close Sidebar">
+                <button type="button" onclick="toggleSidebar(false)"
+                    class="md:hidden w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center text-xs font-bold"
+                    aria-label="Close Sidebar">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -81,56 +92,76 @@
                     <p class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Tier Rank</p>
                     <p id="overall-rank-badge" class="text-xs font-bold text-blue-400 font-mono">Novice Athlete</p>
                 </div>
-                <div class="w-8 h-8 rounded-lg bg-[#0b0f19] border border-[#1f293d] flex items-center justify-center text-blue-400">
+                <div
+                    class="w-8 h-8 rounded-lg bg-[#0b0f19] border border-[#1f293d] flex items-center justify-center text-blue-400">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                     </svg>
                 </div>
             </div>
 
             <!-- Navigation Links -->
             <div class="flex flex-col gap-1" role="tablist" aria-label="Application Tabs">
-                <button type="button" onclick="switchTab('dashboard')" class="nav-tab-btn active flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all text-left group" data-tab="dashboard">
+                <button type="button" onclick="switchTab('dashboard')"
+                    class="nav-tab-btn active flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all text-left group"
+                    data-tab="dashboard">
                     <svg class="w-4 h-4 text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                     </svg>
                     <span>Dashboard</span>
                 </button>
-                <button type="button" onclick="switchTab('library')" class="nav-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all text-left group" data-tab="library">
-                    <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                <button type="button" onclick="switchTab('library')"
+                    class="nav-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all text-left group"
+                    data-tab="library">
+                    <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-400 shrink-0" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
                     <span>Exercise Library</span>
                 </button>
-                <button type="button" onclick="switchTab('log')" class="nav-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all text-left group" data-tab="log">
-                    <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                <button type="button" onclick="switchTab('log')"
+                    class="nav-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all text-left group"
+                    data-tab="log">
+                    <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-400 shrink-0" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
                     <span>Log Workout</span>
                 </button>
-                <button type="button" onclick="switchTab('history')" class="nav-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all text-left group" data-tab="history">
-                    <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                <button type="button" onclick="switchTab('history')"
+                    class="nav-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all text-left group"
+                    data-tab="history">
+                    <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-400 shrink-0" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                     </svg>
                     <span>Workout History</span>
                 </button>
-                <button type="button" onclick="switchTab('settings')" class="nav-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all text-left group" data-tab="settings">
-                    <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <button type="button" onclick="switchTab('settings')"
+                    class="nav-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all text-left group"
+                    data-tab="settings">
+                    <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-400 shrink-0" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                     <span>Settings</span>
                 </button>
             </div>
         </div>
 
-        <!-- Sidebar Footer Status -->
+        <!-- Sidebar Footer -->
         <div class="border-t border-[#1f293d] pt-4 px-2">
             <div class="flex items-center justify-between text-xs text-slate-400">
-                <span>Storage Sync</span>
-                <span class="flex items-center gap-1.5 text-emerald-400 font-semibold text-[11px]">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Active
-                </span>
+                <span class="font-medium text-slate-300">Johan Sam Reji</span>
+                <span class="text-[11px] text-slate-500 font-mono">CSE326</span>
             </div>
         </div>
     </nav>
@@ -139,18 +170,24 @@
     <div class="flex-1 flex flex-col min-w-0 pb-16 md:pb-0">
 
         <!-- Semantic Header Bar -->
-        <header class="h-16 border-b border-[#1f293d] bg-[#111827] px-4 sm:px-6 flex items-center justify-between sticky top-0 z-20">
+        <header
+            class="h-16 border-b border-[#1f293d] bg-[#111827] px-4 sm:px-6 flex items-center justify-between sticky top-0 z-20">
             <div class="flex items-center gap-3">
                 <!-- Mobile Hamburger Button -->
-                <button type="button" onclick="toggleSidebar()" class="md:hidden flex items-center justify-center w-9 h-9 rounded-lg bg-[#151e32] border border-[#1f293d] text-slate-300 hover:text-white" aria-label="Toggle Navigation Menu">
+                <button type="button" onclick="toggleSidebar()"
+                    class="md:hidden flex items-center justify-center w-9 h-9 rounded-lg bg-[#151e32] border border-[#1f293d] text-slate-300 hover:text-white"
+                    aria-label="Toggle Navigation Menu">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
-                <h2 id="top-bar-title" class="text-sm sm:text-base font-bold text-white tracking-wide truncate">Dashboard & Progression</h2>
+                <h2 id="top-bar-title" class="text-sm sm:text-base font-bold text-white tracking-wide truncate">
+                    Dashboard & Progression</h2>
             </div>
             <div class="flex items-center gap-3">
-                <button type="button" onclick="switchTab('log')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs uppercase tracking-wider px-3.5 py-2 rounded-lg flex items-center gap-1.5 transition-colors">
+                <button type="button" onclick="switchTab('log')"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs uppercase tracking-wider px-3.5 py-2 rounded-lg flex items-center gap-1.5 transition-colors">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
@@ -190,7 +227,8 @@
                     <article class="stat-card">
                         <span class="stat-label">Athlete Rank</span>
                         <div class="flex items-baseline gap-2 mt-1">
-                            <span id="stat-overall-rank" class="text-sm sm:text-base font-bold font-mono text-slate-200 truncate">Novice</span>
+                            <span id="stat-overall-rank"
+                                class="text-sm sm:text-base font-bold font-mono text-slate-200 truncate">Novice</span>
                         </div>
                     </article>
                 </div>
@@ -198,13 +236,17 @@
                 <!-- Category Progression Selector -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                     <div>
-                        <h3 id="dashboard-heading" class="text-lg sm:text-xl font-bold text-white tracking-tight">Progression Ladders</h3>
-                        <p class="text-xs text-slate-400 mt-0.5">Select a calisthenics category to view progression tiers and milestone requirements.</p>
+                        <h3 id="dashboard-heading" class="text-lg sm:text-xl font-bold text-white tracking-tight">
+                            Progression Ladders</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Select a calisthenics category to view progression
+                            tiers and milestone requirements.</p>
                     </div>
 
                     <!-- Category Pills -->
-                    <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0" role="tablist" aria-label="Movement Categories">
-                        <button type="button" class="cat-pill active" data-category="push" onclick="switchCategory('push')">
+                    <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0" role="tablist"
+                        aria-label="Movement Categories">
+                        <button type="button" class="cat-pill active" data-category="push"
+                            onclick="switchCategory('push')">
                             Push
                         </button>
                         <button type="button" class="cat-pill" data-category="pull" onclick="switchCategory('pull')">
@@ -220,22 +262,29 @@
                 </div>
 
                 <!-- Category Summary Banner (Solid styling, no gradients) -->
-                <div id="category-summary-banner" class="bg-[#111827] border border-[#1f293d] rounded-xl p-5 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div id="category-summary-banner"
+                    class="bg-[#111827] border border-[#1f293d] rounded-xl p-5 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
                         <div class="flex items-center gap-2">
                             <h4 id="cat-banner-title" class="text-base font-bold text-white">Push Progression</h4>
-                            <span id="cat-banner-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#151e32] text-blue-400 border border-blue-500/30">Tier 1 Unlocked</span>
+                            <span id="cat-banner-badge"
+                                class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#151e32] text-blue-400 border border-blue-500/30">Tier
+                                1 Unlocked</span>
                         </div>
                         <p id="cat-banner-desc" class="text-xs text-slate-400 mt-1 max-w-2xl leading-relaxed">
-                            Upper body horizontal pushing foundation: progressing from incline wall push-ups to advanced planche control.
+                            Upper body horizontal pushing foundation: progressing from incline wall push-ups to advanced
+                            planche control.
                         </p>
                     </div>
                     <div class="flex flex-col sm:items-end gap-1 shrink-0">
                         <span class="text-xs text-slate-400 font-mono">Discipline Completion</span>
                         <div class="w-48 h-2 bg-[#0b0f19] rounded-full overflow-hidden border border-[#1f293d]">
-                            <div id="cat-progress-bar" class="h-full bg-blue-600 rounded-full transition-all duration-300" style="width: 20%;"></div>
+                            <div id="cat-progress-bar"
+                                class="h-full bg-blue-600 rounded-full transition-all duration-300" style="width: 20%;">
+                            </div>
                         </div>
-                        <span id="cat-progress-text" class="text-[11px] font-mono text-blue-400">1 of 5 Unlocked (20%)</span>
+                        <span id="cat-progress-text" class="text-[11px] font-mono text-blue-400">1 of 5 Unlocked
+                            (20%)</span>
                     </div>
                 </div>
 
@@ -249,9 +298,11 @@
             <section id="section-library" class="tab-pane" aria-labelledby="library-heading">
                 <!-- Back to Dashboard Quick Action -->
                 <div class="mb-5">
-                    <button type="button" onclick="switchTab('dashboard')" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 bg-[#111827] hover:bg-slate-800 border border-[#1f293d] transition-colors">
+                    <button type="button" onclick="switchTab('dashboard')"
+                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 bg-[#111827] hover:bg-slate-800 border border-[#1f293d] transition-colors">
                         <svg class="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
                         <span>Back to Dashboard</span>
                     </button>
@@ -259,13 +310,16 @@
 
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                     <div>
-                        <h3 id="library-heading" class="text-lg sm:text-xl font-bold text-white tracking-tight">Calisthenics Movement Library</h3>
-                        <p class="text-xs text-slate-400 mt-0.5">Reference index of all 20 progression movements with primary target muscles and technical execution cues.</p>
+                        <h3 id="library-heading" class="text-lg sm:text-xl font-bold text-white tracking-tight">
+                            Calisthenics Movement Library</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Reference index of all 20 progression movements with
+                            primary target muscles and technical execution cues.</p>
                     </div>
 
                     <!-- Category Filter -->
                     <div class="flex items-center gap-3">
-                        <select id="library-filter" onchange="filterLibrary()" class="bg-[#111827] border border-[#1f293d] text-slate-200 text-xs rounded-lg px-3 py-2 focus:border-blue-500 outline-none">
+                        <select id="library-filter" onchange="filterLibrary()"
+                            class="bg-[#111827] border border-[#1f293d] text-slate-200 text-xs rounded-lg px-3 py-2 focus:border-blue-500 outline-none">
                             <option value="all">All Movements (20 Exercises)</option>
                             <option value="push">Push Progression</option>
                             <option value="pull">Pull Progression</option>
@@ -286,28 +340,34 @@
                 <div class="max-w-2xl mx-auto">
                     <!-- Back to Dashboard Quick Action -->
                     <div class="mb-5">
-                        <button type="button" onclick="switchTab('dashboard')" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 bg-[#111827] hover:bg-slate-800 border border-[#1f293d] transition-colors">
-                            <svg class="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        <button type="button" onclick="switchTab('dashboard')"
+                            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 bg-[#111827] hover:bg-slate-800 border border-[#1f293d] transition-colors">
+                            <svg class="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                             </svg>
                             <span>Back to Dashboard</span>
                         </button>
                     </div>
 
                     <div class="mb-6">
-                        <h3 id="log-heading" class="text-lg sm:text-xl font-bold text-white tracking-tight">Log Workout Session</h3>
-                        <p class="text-xs text-slate-400 mt-0.5">Submit completed sets and repetitions. Surpass the progression milestone to unlock the next level.</p>
+                        <h3 id="log-heading" class="text-lg sm:text-xl font-bold text-white tracking-tight">Log Workout
+                            Session</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Submit completed sets and repetitions. Surpass the
+                            progression milestone to unlock the next level.</p>
                     </div>
 
                     <!-- Form Card with Semantic Flexbox Alignment -->
                     <div class="bg-[#111827] border border-[#1f293d] rounded-xl p-6 sm:p-8 shadow-lg">
                         <form id="workout-form" class="flex flex-col gap-5">
-                            
+
                             <!-- Category and Exercise Dropdowns -->
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <div class="flex-1 flex flex-col gap-1.5">
                                     <label for="form-category" class="form-label">Discipline / Category</label>
-                                    <select id="form-category" required class="form-input" onchange="handleFormCategoryChange()">
+                                    <select id="form-category" required class="form-input"
+                                        onchange="handleFormCategoryChange()">
                                         <option value="push">Push Progression</option>
                                         <option value="pull">Pull Progression</option>
                                         <option value="core">Core Progression</option>
@@ -326,11 +386,13 @@
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <div class="flex-1 flex flex-col gap-1.5">
                                     <label for="form-sets" class="form-label">Sets Completed</label>
-                                    <input type="number" id="form-sets" min="1" required placeholder="e.g. 3" class="form-input">
+                                    <input type="number" id="form-sets" min="1" required placeholder="e.g. 3"
+                                        class="form-input">
                                 </div>
                                 <div class="flex-1 flex flex-col gap-1.5">
                                     <label for="form-reps" class="form-label">Reps (Best Set)</label>
-                                    <input type="number" id="form-reps" min="1" required placeholder="e.g. 15" class="form-input">
+                                    <input type="number" id="form-reps" min="1" required placeholder="e.g. 15"
+                                        class="form-input">
                                 </div>
                                 <div class="flex-1 flex flex-col gap-1.5">
                                     <label for="form-date" class="form-label">Workout Date</label>
@@ -342,19 +404,23 @@
                             <!-- Optional Notes -->
                             <div class="flex flex-col gap-1.5">
                                 <label for="form-notes" class="form-label">Session Notes (Optional)</label>
-                                <input type="text" id="form-notes" placeholder="e.g. Clean pauses, 90s rest interval" class="form-input">
+                                <input type="text" id="form-notes" placeholder="e.g. Clean pauses, 90s rest interval"
+                                    class="form-input">
                             </div>
 
                             <!-- Submit Button -->
-                            <button type="submit" class="mt-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+                            <button type="submit"
+                                class="mt-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
                                 <span>Save Workout & Verify Progression</span>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                 </svg>
                             </button>
 
                             <!-- Form Feedback Notification Box -->
-                            <div id="form-feedback" class="hidden rounded-lg p-3 text-xs font-semibold text-center transition-all"></div>
+                            <div id="form-feedback"
+                                class="hidden rounded-lg p-3 text-xs font-semibold text-center transition-all"></div>
                         </form>
                     </div>
                 </div>
@@ -364,9 +430,11 @@
             <section id="section-history" class="tab-pane" aria-labelledby="history-heading">
                 <!-- Back to Dashboard Quick Action -->
                 <div class="mb-5">
-                    <button type="button" onclick="switchTab('dashboard')" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 bg-[#111827] hover:bg-slate-800 border border-[#1f293d] transition-colors">
+                    <button type="button" onclick="switchTab('dashboard')"
+                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 bg-[#111827] hover:bg-slate-800 border border-[#1f293d] transition-colors">
                         <svg class="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
                         <span>Back to Dashboard</span>
                     </button>
@@ -374,12 +442,15 @@
 
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                     <div>
-                        <h3 id="history-heading" class="text-lg sm:text-xl font-bold text-white tracking-tight">Recent Workout History</h3>
-                        <p class="text-xs text-slate-400 mt-0.5">Chronological record of verified training logs saved in your browser's Web Storage.</p>
+                        <h3 id="history-heading" class="text-lg sm:text-xl font-bold text-white tracking-tight">Recent
+                            Workout History</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Chronological record of verified training logs saved in
+                            your browser's Web Storage.</p>
                     </div>
 
                     <div class="flex items-center gap-3">
-                        <select id="history-filter" onchange="renderHistory()" class="bg-[#111827] border border-[#1f293d] text-slate-200 text-xs rounded-lg px-3 py-2 focus:border-blue-500 outline-none">
+                        <select id="history-filter" onchange="renderHistory()"
+                            class="bg-[#111827] border border-[#1f293d] text-slate-200 text-xs rounded-lg px-3 py-2 focus:border-blue-500 outline-none">
                             <option value="all">All Disciplines</option>
                             <option value="push">Push Logs</option>
                             <option value="pull">Pull Logs</option>
@@ -393,7 +464,8 @@
                 <div class="bg-[#111827] border border-[#1f293d] rounded-xl overflow-hidden shadow-sm">
                     <div class="overflow-x-auto">
                         <table id="history-table" class="w-full text-left text-xs text-slate-300">
-                            <thead class="bg-[#151e32] text-slate-400 uppercase text-[10px] tracking-wider font-semibold border-b border-[#1f293d]">
+                            <thead
+                                class="bg-[#151e32] text-slate-400 uppercase text-[10px] tracking-wider font-semibold border-b border-[#1f293d]">
                                 <tr>
                                     <th scope="col" class="py-3 px-4">Date</th>
                                     <th scope="col" class="py-3 px-4">Discipline</th>
@@ -413,17 +485,22 @@
 
                     <!-- Empty State Container (Displayed if no logs exist) -->
                     <div id="history-empty-state" class="p-8 text-center hidden">
-                        <div class="w-12 h-12 rounded-full bg-[#151e32] border border-[#1f293d] flex items-center justify-center text-slate-400 mx-auto mb-3">
+                        <div
+                            class="w-12 h-12 rounded-full bg-[#151e32] border border-[#1f293d] flex items-center justify-center text-slate-400 mx-auto mb-3">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
                         </div>
                         <h4 class="text-sm font-bold text-white mb-1">No Workout Records Found</h4>
-                        <p class="text-xs text-slate-400 mb-4 max-w-sm mx-auto">You have not logged any training sessions yet. Complete your first set to establish your progression track.</p>
-                        <button type="button" onclick="focusFirstWorkout()" class="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-lg transition-colors">
+                        <p class="text-xs text-slate-400 mb-4 max-w-sm mx-auto">You have not logged any training
+                            sessions yet. Complete your first set to establish your progression track.</p>
+                        <button type="button" onclick="focusFirstWorkout()"
+                            class="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-lg transition-colors">
                             <span>Log Your First Workout</span>
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
                         </button>
                     </div>
@@ -434,28 +511,36 @@
             <section id="section-settings" class="tab-pane" aria-labelledby="settings-heading">
                 <!-- Back to Dashboard Quick Action -->
                 <div class="mb-5">
-                    <button type="button" onclick="switchTab('dashboard')" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 bg-[#111827] hover:bg-slate-800 border border-[#1f293d] transition-colors">
+                    <button type="button" onclick="switchTab('dashboard')"
+                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 bg-[#111827] hover:bg-slate-800 border border-[#1f293d] transition-colors">
                         <svg class="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
                         <span>Back to Dashboard</span>
                     </button>
                 </div>
 
                 <div class="mb-6">
-                    <h3 id="settings-heading" class="text-lg sm:text-xl font-bold text-white tracking-tight">System Settings & Data Control</h3>
-                    <p class="text-xs text-slate-400 mt-0.5">Manage browser LocalStorage state and reset ladder milestones.</p>
+                    <h3 id="settings-heading" class="text-lg sm:text-xl font-bold text-white tracking-tight">System
+                        Settings & Data Control</h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Manage browser LocalStorage state and reset ladder
+                        milestones.</p>
                 </div>
 
                 <div class="bg-[#111827] border border-[#1f293d] rounded-xl p-6">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#1f293d]">
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#1f293d]">
                         <div>
                             <h4 class="text-xs font-bold text-white uppercase tracking-wider">Audio Feedback</h4>
-                            <p class="text-xs text-slate-400 mt-0.5">Sound notification triggers automatically upon saving a session or advancing a milestone tier.</p>
+                            <p class="text-xs text-slate-400 mt-0.5">Sound notification triggers automatically upon
+                                saving a session or advancing a milestone tier.</p>
                         </div>
-                        <button type="button" onclick="testSound()" class="px-3.5 py-2 rounded-lg bg-[#151e32] hover:bg-slate-800 border border-[#1f293d] text-xs font-semibold text-slate-300 flex items-center gap-2 shrink-0">
+                        <button type="button" onclick="testSound()"
+                            class="px-3.5 py-2 rounded-lg bg-[#151e32] hover:bg-slate-800 border border-[#1f293d] text-xs font-semibold text-slate-300 flex items-center gap-2 shrink-0">
                             <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                             </svg>
                             <span>Test Audio Chime</span>
                         </button>
@@ -464,15 +549,19 @@
                     <!-- Reset Danger Zone -->
                     <div class="pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
-                            <h4 class="text-xs font-bold text-red-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <h4
+                                class="text-xs font-bold text-red-400 uppercase tracking-wider flex items-center gap-1.5">
                                 <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                 </svg>
                                 <span>Reset Local Storage</span>
                             </h4>
-                            <p class="text-xs text-slate-400 mt-0.5">Purges all workout table entries and reverts all progression ladders to Level 1.</p>
+                            <p class="text-xs text-slate-400 mt-0.5">Purges all workout table entries and reverts all
+                                progression ladders to Level 1.</p>
                         </div>
-                        <button type="button" onclick="openWipeModal()" class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider transition-colors shrink-0">
+                        <button type="button" onclick="openWipeModal()"
+                            class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider transition-colors shrink-0">
                             Wipe All Data
                         </button>
                     </div>
@@ -482,55 +571,69 @@
         </main>
 
         <!-- Semantic Footer -->
-        <footer class="border-t border-[#1f293d] bg-[#111827] py-5 px-6 text-center text-xs text-slate-500">
-            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-                <p>&copy; <span id="current-year"></span> Apex Calisthenics Architecture. Vanilla HTML5, Tailwind CSS & JavaScript.</p>
-                <p class="text-blue-400 font-mono text-[11px]">Strict Compliance & Local Web Storage API</p>
+        <footer class="border-t border-[#1f293d] bg-[#111827] py-4 px-6 text-xs text-slate-400">
+            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+                <p>&copy; <span id="current-year"></span> Johan Sam Reji</p>
+                <p class="text-slate-500">Calisthenics Progression Ladder</p>
             </div>
         </footer>
     </div>
 
     <!-- Mobile Bottom Navigation Bar (Visible on mobile/tablet) -->
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[#111827] border-t border-[#1f293d] py-2 px-3 z-40 flex justify-around items-center" aria-label="Mobile Navigation">
-        <button type="button" onclick="switchTab('dashboard')" class="mobile-nav-btn active flex flex-col items-center gap-1 text-slate-400" data-tab="dashboard">
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[#111827] border-t border-[#1f293d] py-2 px-3 z-40 flex justify-around items-center"
+        aria-label="Mobile Navigation">
+        <button type="button" onclick="switchTab('dashboard')"
+            class="mobile-nav-btn active flex flex-col items-center gap-1 text-slate-400" data-tab="dashboard">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
             </svg>
             <span class="text-[10px] font-semibold">Ladder</span>
         </button>
-        <button type="button" onclick="switchTab('library')" class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="library">
+        <button type="button" onclick="switchTab('library')"
+            class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="library">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
             <span class="text-[10px] font-semibold">Library</span>
         </button>
-        <button type="button" onclick="switchTab('log')" class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="log">
+        <button type="button" onclick="switchTab('log')"
+            class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="log">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
             </svg>
             <span class="text-[10px] font-semibold">Log</span>
         </button>
-        <button type="button" onclick="switchTab('history')" class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="history">
+        <button type="button" onclick="switchTab('history')"
+            class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="history">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
             <span class="text-[10px] font-semibold">History</span>
         </button>
-        <button type="button" onclick="switchTab('settings')" class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="settings">
+        <button type="button" onclick="switchTab('settings')"
+            class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="settings">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
             </svg>
             <span class="text-[10px] font-semibold">Settings</span>
         </button>
     </nav>
 
     <!-- Custom Native Modal: Wipe All Data Confirmation -->
-    <div id="wipe-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="wipe-modal-title">
+    <div id="wipe-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true"
+        aria-labelledby="wipe-modal-title">
         <div class="modal-card">
             <div class="flex items-center gap-3 mb-3">
-                <div class="w-10 h-10 rounded-lg bg-red-950/60 text-red-400 flex items-center justify-center border border-red-500/30">
+                <div
+                    class="w-10 h-10 rounded-lg bg-red-950/60 text-red-400 flex items-center justify-center border border-red-500/30">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
                 </div>
                 <div>
@@ -539,13 +642,16 @@
                 </div>
             </div>
             <p class="text-xs text-slate-300 leading-relaxed mb-6">
-                Are you completely sure you want to delete all logged workout records from the table and reset all progression ladders back to Level 1?
+                Are you completely sure you want to delete all logged workout records from the table and reset all
+                progression ladders back to Level 1?
             </p>
             <div class="flex items-center justify-end gap-3">
-                <button type="button" onclick="closeWipeModal()" class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 transition-colors">
+                <button type="button" onclick="closeWipeModal()"
+                    class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 transition-colors">
                     Cancel
                 </button>
-                <button type="button" onclick="confirmWipeData()" class="px-4 py-2 rounded-lg text-xs font-bold text-white bg-red-600 hover:bg-red-700 transition-colors">
+                <button type="button" onclick="confirmWipeData()"
+                    class="px-4 py-2 rounded-lg text-xs font-bold text-white bg-red-600 hover:bg-red-700 transition-colors">
                     Yes, Purge Everything
                 </button>
             </div>
@@ -555,23 +661,26 @@
     <!-- Celebration Level-Up Modal -->
     <div id="levelup-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
         <div class="modal-card text-center">
-            <div class="w-12 h-12 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-400 flex items-center justify-center mx-auto mb-3">
+            <div
+                class="w-12 h-12 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-400 flex items-center justify-center mx-auto mb-3">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                 </svg>
             </div>
             <h3 class="text-lg font-bold text-white mb-1">Milestone Unlocked</h3>
             <p id="levelup-details" class="text-xs text-slate-300 mb-6 max-w-sm mx-auto leading-relaxed">
                 You met the required target reps and officially unlocked the next movement in your progression ladder.
             </p>
-            <button type="button" onclick="closeLevelupModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider py-3 rounded-lg transition-colors">
+            <button type="button" onclick="closeLevelupModal()"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider py-3 rounded-lg transition-colors">
                 Continue Training
             </button>
         </div>
     </div>
 
     <!-- External Script with Cache-Buster -->
-    <script src="script.js?v=3.2"></script>
+    <script src="script.js?v=3.3"></script>
 </body>
 
 </html>
