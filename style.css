@@ -329,6 +329,17 @@ body {
     border-color: var(--accent-primary);
 }
 
+.form-input option:disabled {
+    color: var(--text-muted);
+    background-color: #0d121e;
+    font-style: italic;
+}
+
+button:disabled {
+    cursor: not-allowed !important;
+    opacity: 0.6;
+}
+
 /* --------------------------------------------------------------------------
    10. Semantic HTML Table Styling (Workout History)
    -------------------------------------------------------------------------- */

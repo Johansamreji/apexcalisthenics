@@ -185,7 +185,13 @@ function loadState() {
             if (parsed && typeof parsed === 'object') {
                 appState.activeTab = parsed.activeTab || 'dashboard';
                 appState.activeCategory = parsed.activeCategory || 'push';
-                appState.unlockedLevels = Object.assign({ push: 1, pull: 1, core: 1, legs: 1 }, parsed.unlockedLevels);
+                const ul = parsed.unlockedLevels || {};
+                appState.unlockedLevels = {
+                    push: Math.max(1, Math.min(5, parseInt(ul.push, 10) || 1)),
+                    pull: Math.max(1, Math.min(5, parseInt(ul.pull, 10) || 1)),
+                    core: Math.max(1, Math.min(5, parseInt(ul.core, 10) || 1)),
+                    legs: Math.max(1, Math.min(5, parseInt(ul.legs, 10) || 1))
+                };
                 appState.history = Array.isArray(parsed.history) ? parsed.history : [];
             }
         }
@@ -405,9 +411,9 @@ function renderDashboard() {
                     </div>
                 </div>
                 <div class="border-t border-[#1f293d] pt-3 mt-2">
-                    <button type="button" onclick="quickLogExercise('${category.id}', ${level.id})" class="w-full bg-[#0b0f19] hover:bg-slate-800 text-slate-400 hover:text-white font-semibold text-xs py-2 px-3 rounded-lg border border-[#1f293d] transition-colors flex items-center justify-center gap-1.5">
-                        <span>Attempt / Log</span>
-                        ${getSvgIcon('arrow-right', 'w-3 h-3')}
+                    <button type="button" disabled class="w-full bg-[#0b0f19] text-slate-500 font-semibold text-xs py-2 px-3 rounded-lg border border-[#1f293d] flex items-center justify-center gap-1.5 cursor-not-allowed opacity-60" title="Tier Locked: Complete previous level target to unlock">
+                        ${getSvgIcon('lock', 'w-3.5 h-3.5')}
+                        <span>Tier Locked</span>
                     </button>
                 </div>
             `;
@@ -418,7 +424,7 @@ function renderDashboard() {
 }
 
 // ----------------------------------------------------------------------------
-// 7. Exercise Library (Selects ANY card into Log form regardless of lock state)
+// 7. Exercise Library (Enforces Lock States Across All Disciplines)
 // ----------------------------------------------------------------------------
 function filterLibrary() {
     renderLibrary();
@@ -471,11 +477,17 @@ function renderLibrary() {
 
                 <div class="border-t border-[#1f293d] pt-3 flex items-center justify-between">
                     <span class="text-[11px] font-mono text-slate-400">Target: <strong class="text-blue-400">${level.targetReq} reps</strong></span>
-                    <!-- Fixed: Quick Log selects ANY card in the log form regardless of unlock status -->
-                    <button type="button" onclick="quickLogExercise('${category.id}', ${level.id})" class="text-xs font-semibold text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors">
-                        <span>Log Workout</span>
-                        ${getSvgIcon('arrow-right', 'w-3 h-3')}
-                    </button>
+                    ${isUnlocked ? `
+                        <button type="button" onclick="quickLogExercise('${category.id}', ${level.id})" class="text-xs font-semibold text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors">
+                            <span>Log Workout</span>
+                            ${getSvgIcon('arrow-right', 'w-3 h-3')}
+                        </button>
+                    ` : `
+                        <span class="text-xs font-mono text-slate-500 flex items-center gap-1 bg-[#0b0f19] px-2.5 py-1 rounded border border-[#1f293d] opacity-75">
+                            ${getSvgIcon('lock', 'w-3.5 h-3.5')}
+                            <span>Locked</span>
+                        </span>
+                    `}
                 </div>
             `;
 
@@ -485,7 +497,7 @@ function renderLibrary() {
 }
 
 // ----------------------------------------------------------------------------
-// 8. Log Workout Form Architecture (Strict HTML5 Validation)
+// 8. Log Workout Form Architecture (Strict HTML5 Validation & Lock Guard)
 // ----------------------------------------------------------------------------
 function setupLogForm() {
     const categorySelect = document.getElementById('form-category');
@@ -525,22 +537,25 @@ function updateExerciseDropdown(explicitLevelId = null) {
     const currentUnlockedLvl = appState.unlockedLevels[catKey] || 1;
     exerciseSelect.innerHTML = '';
 
-    // Allow ANY exercise to be selected, clearly tagging unlock status
+    // Strictly enforce locked vs unlocked options in the select element
     category.levels.forEach(level => {
         const option = document.createElement('option');
         option.value = level.id;
         const isUnlocked = level.id <= currentUnlockedLvl;
 
         if (isUnlocked) {
-            option.textContent = `${level.id}. ${level.name} (Unlocked)`;
+            option.disabled = false;
+            option.textContent = `${level.id}. ${level.name} (Unlocked • Target ${level.targetReq} reps)`;
         } else {
-            option.textContent = `${level.id}. ${level.name} (Tier ${level.id} • Target ${level.targetReq} reps)`;
+            option.disabled = true;
+            option.textContent = `${level.id}. ${level.name} (Locked - Complete Tier ${level.id - 1} First)`;
         }
 
         exerciseSelect.appendChild(option);
     });
 
-    if (explicitLevelId !== null) {
+    // Ensure selected value is strictly an unlocked level
+    if (explicitLevelId !== null && explicitLevelId <= currentUnlockedLvl) {
         exerciseSelect.value = explicitLevelId;
     } else {
         exerciseSelect.value = currentUnlockedLvl;
@@ -549,9 +564,23 @@ function updateExerciseDropdown(explicitLevelId = null) {
 
 /**
  * Quick Log Bridge from Exercise Library or Ladder:
- * Selects ANY clicked card in the form view, regardless of whether it is unlocked or not.
+ * Only allows logging unlocked exercises; blocks and alerts if locked.
  */
 function quickLogExercise(catKey, levelId) {
+    const currentUnlockedLvl = appState.unlockedLevels[catKey] || 1;
+
+    // Strict Lock Enforcement: Prevent logging locked exercises
+    if (levelId > currentUnlockedLvl) {
+        const category = EXERCISE_DATABASE[catKey];
+        const lockedEx = category ? category.levels.find(l => l.id === levelId) : null;
+        const currentEx = category ? category.levels.find(l => l.id === currentUnlockedLvl) : null;
+
+        switchTab('log');
+        showFormFeedback(`Access Denied: "${lockedEx ? lockedEx.name : 'Selected Exercise'}" is locked. Complete ${currentEx ? currentEx.targetReq : 15} reps on Tier ${currentUnlockedLvl} (${currentEx ? currentEx.name : ''}) first.`, false);
+        updateExerciseDropdown(currentUnlockedLvl);
+        return;
+    }
+
     appState.activeCategory = catKey;
     switchTab('log');
 
@@ -605,6 +634,14 @@ function initFormSubmission() {
         }
 
         const currentLvl = appState.unlockedLevels[categoryKey] || 1;
+
+        // Strict Progression Enforcement: Cannot log a locked exercise
+        if (exerciseId > currentLvl) {
+            const currentEx = category.levels.find(l => l.id === currentLvl);
+            showFormFeedback(`Validation Error: "${exercise.name}" is locked. Complete ${currentEx ? currentEx.targetReq : 15} reps on Tier ${currentLvl} (${currentEx ? currentEx.name : ''}) to unlock it.`, false);
+            return;
+        }
+
         const isTargetMet = reps >= exercise.targetReq;
 
         // Record entry
@@ -624,12 +661,12 @@ function initFormSubmission() {
 
         appState.history.unshift(record);
 
-        // Progression Engine: If user met target on current unlocked tier or advanced tier
+        // Progression Engine: Level up only when target reps met on the current active unlocked tier
         let leveledUp = false;
         let newUnlockedExercise = null;
 
-        if (isTargetMet && exerciseId >= currentLvl && currentLvl < category.levels.length) {
-            appState.unlockedLevels[categoryKey] = Math.min(category.levels.length, currentLvl + 1);
+        if (isTargetMet && exerciseId === currentLvl && currentLvl < category.levels.length) {
+            appState.unlockedLevels[categoryKey] = currentLvl + 1;
             leveledUp = true;
             newUnlockedExercise = category.levels.find(l => l.id === appState.unlockedLevels[categoryKey]);
         }
@@ -651,6 +688,9 @@ function initFormSubmission() {
         document.getElementById('form-sets').value = '';
         document.getElementById('form-reps').value = '';
         document.getElementById('form-notes').value = '';
+
+        // Refresh dropdown to reflect any newly unlocked exercises
+        updateExerciseDropdown();
 
         // Re-render other views in background
         renderDashboard();
