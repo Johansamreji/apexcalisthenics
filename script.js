@@ -72,9 +72,14 @@ const EXERCISE_DATABASE = {
     }
 };
 
-// ----------------------------------------------------------------------------
-// 2. Application State & Storage Management
-// ----------------------------------------------------------------------------
+// Helper to get local date in YYYY-MM-DD format (avoids UTC timezone mismatch)
+function getLocalDateString() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
 const STORAGE_KEY = 'apex_calisthenics_v2_state';
 
 let appState = {
@@ -145,7 +150,9 @@ const TAB_TITLES = {
 };
 
 function switchTab(tabId) {
-    if (!document.getElementById(`section-${tabId}`)) return;
+    if (!tabId || !document.getElementById(`section-${tabId}`)) {
+        tabId = 'dashboard';
+    }
 
     appState.activeTab = tabId;
     saveState();
@@ -203,14 +210,16 @@ function initNavigationEvents() {
 // 4. Dashboard & Progression Ladder Rendering
 // ----------------------------------------------------------------------------
 function switchCategory(catKey) {
-    if (!EXERCISE_DATABASE[catKey]) return;
+    if (!EXERCISE_DATABASE[catKey]) {
+        catKey = 'push';
+    }
     appState.activeCategory = catKey;
     saveState();
 
     // Update Category Pills
     document.querySelectorAll('.cat-pill').forEach(pill => {
-        const isCurrent = pill.textContent.toLowerCase().includes(catKey);
-        pill.classList.toggle('active', isCurrent);
+        const pillCat = pill.dataset.category || pill.textContent.toLowerCase();
+        pill.classList.toggle('active', pillCat.includes(catKey));
     });
 
     renderDashboard();
@@ -400,8 +409,8 @@ function setupLogForm() {
     const categorySelect = document.getElementById('form-category');
     const dateInput = document.getElementById('form-date');
 
-    // Strict Syllabus Requirement: Date picker with max attribute set to today
-    const today = new Date().toISOString().split('T')[0];
+    // Strict Syllabus Requirement: Date picker with max attribute set to today (local time)
+    const today = getLocalDateString();
     if (dateInput) {
         dateInput.max = today;
         if (!dateInput.value) {
@@ -485,7 +494,7 @@ function initFormSubmission() {
         const notes = document.getElementById('form-notes').value.trim();
 
         // Strict Client-Side Form Validation check
-        const today = new Date().toISOString().split('T')[0];
+        const today = getLocalDateString();
         if (!date || date > today) {
             showFormFeedback("Invalid date. Workouts cannot be logged for future dates.", false);
             return;
@@ -703,5 +712,9 @@ window.closeWipeModal = closeWipeModal;
 window.confirmWipeData = confirmWipeData;
 window.closeLevelupModal = closeLevelupModal;
 
-// Bootstrap on DOM ready
-document.addEventListener('DOMContentLoaded', init);
+// Bootstrap on DOM ready (handles cached scripts and deferred loading)
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}

@@ -316,8 +316,9 @@ body {
     transition: opacity var(--transition-fast);
 }
 
-.modal-backdrop.hidden {
-    display: none;
+.modal-backdrop.hidden,
+.hidden {
+    display: none !important;
 }
 
 .modal-card {

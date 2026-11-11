@@ -28,7 +28,7 @@
     </script>
 
     <!-- Custom Premium Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2.2">
 </head>
 
 <body class="bg-darkBg text-slate-100 antialiased min-h-screen flex flex-col md:flex-row">
@@ -60,19 +60,19 @@
 
             <!-- Navigation Links -->
             <div class="flex flex-col gap-1.5" role="tablist" aria-label="Main Navigation">
-                <button type="button" class="nav-tab-btn active flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all text-left group" data-tab="dashboard">
+                <button type="button" onclick="switchTab('dashboard')" class="nav-tab-btn active flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all text-left group" data-tab="dashboard">
                     <span class="text-lg group-hover:scale-110 transition-transform">📊</span>
                     <span>Dashboard</span>
                 </button>
-                <button type="button" class="nav-tab-btn flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all text-left group" data-tab="library">
+                <button type="button" onclick="switchTab('library')" class="nav-tab-btn flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all text-left group" data-tab="library">
                     <span class="text-lg group-hover:scale-110 transition-transform">📚</span>
                     <span>Exercise Library</span>
                 </button>
-                <button type="button" class="nav-tab-btn flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all text-left group" data-tab="log">
+                <button type="button" onclick="switchTab('log')" class="nav-tab-btn flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all text-left group" data-tab="log">
                     <span class="text-lg group-hover:scale-110 transition-transform">✍️</span>
                     <span>Log Workout</span>
                 </button>
-                <button type="button" class="nav-tab-btn flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all text-left group" data-tab="history">
+                <button type="button" onclick="switchTab('history')" class="nav-tab-btn flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all text-left group" data-tab="history">
                     <span class="text-lg group-hover:scale-110 transition-transform">📜</span>
                     <span>History</span>
                 </button>
@@ -158,16 +158,16 @@
 
                     <!-- Category Pills -->
                     <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0" role="tablist" aria-label="Movement Categories">
-                        <button type="button" class="cat-pill active" onclick="switchCategory('push')">
+                        <button type="button" class="cat-pill active" data-category="push" onclick="switchCategory('push')">
                             <span>⚡</span> Push
                         </button>
-                        <button type="button" class="cat-pill" onclick="switchCategory('pull')">
+                        <button type="button" class="cat-pill" data-category="pull" onclick="switchCategory('pull')">
                             <span>🧗</span> Pull
                         </button>
-                        <button type="button" class="cat-pill" onclick="switchCategory('core')">
+                        <button type="button" class="cat-pill" data-category="core" onclick="switchCategory('core')">
                             <span>🔥</span> Core
                         </button>
-                        <button type="button" class="cat-pill" onclick="switchCategory('legs')">
+                        <button type="button" class="cat-pill" data-category="legs" onclick="switchCategory('legs')">
                             <span>🦵</span> Legs
                         </button>
                     </div>
@@ -348,19 +348,19 @@
 
     <!-- Mobile Bottom Navigation Bar (Visible on mobile/tablet) -->
     <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[#0d1322]/95 backdrop-blur-lg border-t border-slate-800 py-2 px-4 z-40 flex justify-around items-center">
-        <button type="button" class="mobile-nav-btn active flex flex-col items-center gap-1 text-slate-400" data-tab="dashboard">
+        <button type="button" onclick="switchTab('dashboard')" class="mobile-nav-btn active flex flex-col items-center gap-1 text-slate-400" data-tab="dashboard">
             <span class="text-lg">📊</span>
             <span class="text-[10px] font-semibold">Ladder</span>
         </button>
-        <button type="button" class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="library">
+        <button type="button" onclick="switchTab('library')" class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="library">
             <span class="text-lg">📚</span>
             <span class="text-[10px] font-semibold">Library</span>
         </button>
-        <button type="button" class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="log">
+        <button type="button" onclick="switchTab('log')" class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="log">
             <span class="text-lg">✍️</span>
             <span class="text-[10px] font-semibold">Log</span>
         </button>
-        <button type="button" class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="history">
+        <button type="button" onclick="switchTab('history')" class="mobile-nav-btn flex flex-col items-center gap-1 text-slate-400" data-tab="history">
             <span class="text-lg">📜</span>
             <span class="text-[10px] font-semibold">History</span>
         </button>
@@ -406,8 +406,8 @@
         </div>
     </div>
 
-    <!-- External Script -->
-    <script src="script.js"></script>
+    <!-- External Script with Cache-Buster -->
+    <script src="script.js?v=2.2"></script>
 </body>
 
 </html>
