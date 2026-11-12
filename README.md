@@ -5,7 +5,7 @@
 **Course**: CSE326 — Internet Programming (Continuous Assessment 2)  
 **Institution**: Lovely Professional University (LPU)  
 **Developer**: Johan Sam Reji  
-**Live Demo**: [GitHub Pages](https://johansamreji.github.io/lpu-cse326-ca2/)
+**Live Demo**: [GitHub Pages](https://johansamreji.github.io/apexcalisthenics/)
 
 ---
 
@@ -91,3 +91,4 @@ No build step, package manager, or server environment is required:
 ## License
 
 Developed by **Johan Sam Reji** for academic submission in **CSE326 (Internet Programming)** at Lovely Professional University.
+
