@@ -1,8 +1,8 @@
-# Apex Calisthenics — Progression Ladder Platform
+# Apex Calisthenics - Progression Ladder Platform
 
 > An enterprise-grade, single-page web application (SPA) designed to track, log, and advance through calisthenics skill progressions across four foundational movement disciplines. Built with strictly native HTML5, Tailwind CSS, and Vanilla JavaScript.
 
-**Course**: CSE326 — Internet Programming (Continuous Assessment 2)  
+**Course**: CSE326 - Internet Programming (Continuous Assessment 2)  
 **Institution**: Lovely Professional University (LPU)  
 **Developer**: Johan Sam Reji  
 **Live Demo**: [GitHub Pages](https://johansamreji.github.io/apexcalisthenics/)
